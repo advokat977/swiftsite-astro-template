@@ -1,25 +1,12 @@
 ---
 import { FEATURES } from "../../swiftsite.config";
 
-/** Toggle for the red “S” curve on the right. Set to false to hide it. */
-const SHOW_CURVE = true;
+/** Ako želiš bez ikona, stavi na false */
+const SHOW_ICONS = true;
 ---
 <section class="hero">
-  <!-- Background grid + glow -->
-  <div class="bg">
-    <svg viewBox="0 0 100 100" aria-hidden="true" class="grid">
-      <defs>
-        <pattern id="p" width="8" height="8" patternUnits="userSpaceOnUse">
-          <path d="M 8 0 L 0 0 0 8" fill="none" stroke="currentColor" stroke-opacity=".03" stroke-width=".5"/>
-        </pattern>
-      </defs>
-      <rect width="100" height="100" fill="url(#p)"/>
-    </svg>
-    <div class="glow"></div>
-  </div>
-
   <div class="container wrap">
-    <!-- Left: copy -->
+    <!-- Lijevo: copy -->
     <div class="left">
       <h1>Launch your site in <span class="nowrap">72h</span> — effortlessly</h1>
       <p class="lede">
@@ -46,54 +33,20 @@ const SHOW_CURVE = true;
       </ul>
     </div>
 
-    <!-- Right: S-curve with icons (can be turned off above) -->
-    {SHOW_CURVE && (
+    <!-- Desno: velike ikone (boje po značenju) -->
+    {SHOW_ICONS && (
       <div class="right">
-        <div class="curve-wrap">
-          <!-- Clear “S” path: top-right → mid-left → bottom-right -->
-          <svg class="curve" viewBox="0 0 600 800" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="12" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%"  stop-color="var(--accent)" stop-opacity=".55"/>
-                <stop offset="100%" stop-color="var(--accent)" stop-opacity=".15"/>
-              </linearGradient>
-            </defs>
-
-            <!-- fat glow -->
-            <path
-              d="M 520 80
-                 C 420 60, 340 120, 320 200
-                 C 300 280, 240 320, 150 360
-                 C 60 400, 60 470, 150 510
-                 C 260 560, 340 620, 420 700
-                 C 500 780, 520 820, 520 820"
-              fill="none" stroke="url(#g)" stroke-width="12" filter="url(#soft)" stroke-linecap="round"/>
-            <!-- sharp stroke -->
-            <path
-              d="M 520 80
-                 C 420 60, 340 120, 320 200
-                 C 300 280, 240 320, 150 360
-                 C 60 400, 60 470, 150 510
-                 C 260 560, 340 620, 420 700
-                 C 500 780, 520 820, 520 820"
-              fill="none" stroke="var(--accent)" stroke-opacity=".9" stroke-width="4" stroke-linecap="round"/>
-          </svg>
-
-          <!-- Icon chips placed along the S -->
-          <div class="icon i1" aria-hidden="true" title="Email">
+        <div class="icons">
+          <div class="icon mail"    title="Email"    aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           </div>
-          <div class="icon i2" aria-hidden="true" title="Calendar">
+          <div class="icon calendar" title="Calendar" aria-hidden="true">
             <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           </div>
-          <div class="icon i3" aria-hidden="true" title="Video">
+          <div class="icon video"   title="Video"    aria-hidden="true">
             <svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M17 9l4-2v10l-4-2z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           </div>
-          <div class="icon i4" aria-hidden="true" title="Files">
+          <div class="icon files"   title="Files"    aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 3v6h6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           </div>
         </div>
@@ -104,32 +57,21 @@ const SHOW_CURVE = true;
 
 <style>
 .hero{position:relative;overflow:hidden}
-.bg{position:absolute;inset:0}
-.grid{width:100%;height:100%;color:#0a0a0a}
-:root[data-theme="dark"] .grid{color:#ffffff}
-.glow{
-  position:absolute;left:-18%;right:-18%;bottom:-10%;
-  height:45%;
-  background:radial-gradient(60% 80% at 55% 0%,
-    color-mix(in oklab, var(--accent) 22%, transparent) 0%,
-    transparent 70%);
-  filter:blur(46px);opacity:.35;pointer-events:none;
-}
 
 /* Layout */
 .wrap{
   display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;
-  min-height:66vh;padding:60px 0 20px;
+  min-height:58vh;padding:56px 0 10px;
 }
 @media (max-width: 980px){
-  .wrap{grid-template-columns:1fr;gap:28px;min-height:auto;padding:32px 0 16px}
+  .wrap{grid-template-columns:1fr;gap:28px;min-height:auto;padding:28px 0 8px}
 }
 
 /* Copy */
-.left h1{font-size:clamp(36px,5.6vw,58px);line-height:1.06;margin:0 0 10px}
+.left h1{font-size:clamp(38px,5.8vw,64px);line-height:1.05;margin:0 0 12px}
 .nowrap{white-space:nowrap}
-.left .lede{font-size:clamp(18px,2.2vw,21px);color:var(--muted);margin:0 0 18px}
-.cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:6px 0 8px}
+.left .lede{font-size:clamp(18px,2.2vw,22px);color:var(--muted);margin:0 0 18px}
+.cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:8px 0 10px}
 .link{font-weight:600;color:var(--ink)} .link:hover{text-decoration:underline}
 
 .testimonial{
@@ -146,30 +88,26 @@ const SHOW_CURVE = true;
   border:1px solid var(--border);border-radius:999px;padding:7px 10px
 }
 
-/* S-curve + icons */
+/* Ikone – velike, obojene */
 .right{display:flex;justify-content:center}
-.curve-wrap{position:relative;width:min(560px,100%);aspect-ratio:3/4}
-.curve{position:absolute;inset:0}
-
-.icon{
-  position:absolute; width:44px; height:44px;
-  border-radius:12px; background:var(--bg);
-  border:1px solid var(--border);
-  color:color-mix(in oklab, var(--ink) 88%, transparent);
-  display:grid;place-items:center;
-  box-shadow:0 8px 18px rgba(16,24,40,.10);
+.icons{
+  display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:18px;
+  justify-items:center;
 }
-.icon svg{width:22px;height:22px}
+.icon{
+  width:96px;height:96px;border-radius:18px;
+  display:grid;place-items:center;
+  color:white; /* boju ikone postavljamo na white, a kartica nosi brand boju */
+  box-shadow:0 18px 36px rgba(16,24,40,.16), inset 0 0 0 1px rgba(255,255,255,.25);
+}
+.icon svg{width:44px;height:44px;stroke:#fff}
 
-/* Positioned along the S spine */
-.i1{top:22%; left:60%}
-.i2{top:43%; left:20%}
-.i3{top:62%; left:63%}
-.i4{top:82%; left:50%}
+.mail{background:#0ea5e9;}     /* sky */
+.calendar{background:#22c55e;} /* green */
+.video{background:#a855f7;}    /* purple */
+.files{background:#f59e0b;}    /* amber */
 
-/* Dark mode tweaks */
 :root[data-theme="dark"] .icon{
-  background:#0f1521;border-color:#1c2330;color:#cfd6e4;
-  box-shadow:0 8px 18px rgba(0,0,0,.35)
+  box-shadow:0 18px 36px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.18);
 }
 </style>
