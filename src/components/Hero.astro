@@ -2,8 +2,8 @@
 import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 ---
 <section class="hero">
-  <div class="inner">
-    <h1>{SITE.title}</h1>
+  <div class="container inner">
+    <h1>{SITE.title} <span class="emoji">🎉</span></h1>
     <p class="lede">{SITE.tagline}</p>
     <div class="actions">
       {FEATURES.contact && <a class="btn primary" href="#contact">Get in touch</a>}
@@ -15,17 +15,10 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 
 <style>
 .hero{
-  display:flex;align-items:center;justify-content:center;
-  min-height:70vh;text-align:center;padding:40px 20px;
-  background:linear-gradient(135deg,#ffffff 0%,#f6f7fb 100%);
+  min-height:68vh;display:flex;align-items:center;
+  background:linear-gradient(180deg,#fff 0%,#f6f7fb 100%);
 }
-.inner{max-width:720px}
-.hero h1{font-size:52px;font-weight:700;line-height:1.1;margin:0 0 20px}
-.hero .lede{font-size:20px;color:var(--muted);margin:0 0 30px}
-.actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn{padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:600}
-.btn.primary{background:var(--accent);color:#fff;box-shadow:0 2px 6px #00000022}
-.btn.primary:hover{background:#9a1818}
-.btn.ghost{border:1px solid #ddd;color:var(--ink);background:#fff}
-.btn.ghost:hover{background:#f0f0f0}
+.inner{text-align:center}
+.emoji{font-size:0.9em}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 </style>
