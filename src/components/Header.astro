@@ -1,5 +1,5 @@
 ---
-import { SITE, FEATURES } from "../../swiftsite.config";
+import { SITE, FEATURES, ASSETS } from "../../swiftsite.config";
 
 const links = [
   { href: "/", label: "Home" },
@@ -10,9 +10,12 @@ const links = [
 ---
 <header class="shell">
   <div class="container bar">
-    <div class="brand">
-      <a href="/"><strong>{SITE.title}</strong></a>
-    </div>
+    <a class="brand" href="/" aria-label={SITE.title}>
+      <!-- Logo u maloj "piluloj" sa bijelom pozadinom da bude čitljiv i u dark modu -->
+      <span class="logo-card">
+        <img src={ASSETS.logoLight} alt="SwiftSite logo" width="132" height="28" loading="eager" />
+      </span>
+    </a>
 
     <nav class="nav">
       {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
@@ -41,36 +44,20 @@ const links = [
     else { drawer?.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
   });
 
-  // Theme toggle: ciklus light → dark → system → light …
+  // Theme toggle: light → dark → system → light
   const KEY = "swiftsite-theme";
   const btn = document.querySelector<HTMLButtonElement>(".toggle");
-
-  function iconFor(mode){
-    return mode === "dark" ? "☀️" : mode === "light" ? "🖥️" : "🌙";
-    // logika: prikaži ikonu ZA sljedeći klik:
-    // light (sljedeće dark) => 🌙
-    // dark (sljedeće system) => 🖥️
-    // system (sljedeće light) => ☀️
-  }
-  function nextMode(mode){
-    return mode === "light" ? "dark" : mode === "dark" ? "system" : "light";
-  }
-  function currentMode(){
-    return document.documentElement.getAttribute("data-theme-mode") || "system";
-  }
+  function iconFor(mode){ return mode === "dark" ? "☀️" : mode === "light" ? "🖥️" : "🌙"; }
+  function nextMode(mode){ return mode === "light" ? "dark" : mode === "dark" ? "system" : "light"; }
+  function currentMode(){ return document.documentElement.getAttribute("data-theme-mode") || "system"; }
   function setMode(mode){
-    window.__setThemeMode?.(mode);           // definisano u BaseLayout-u
+    window.__setThemeMode?.(mode);
     try { localStorage.setItem(KEY, mode) } catch(_) {}
     btn && (btn.textContent = iconFor(mode));
     btn && btn.setAttribute("title", `Theme: ${mode}`);
   }
-
-  // init ikona
   setMode(currentMode());
-
-  btn?.addEventListener("click", () => {
-    setMode(nextMode(currentMode()));
-  });
+  btn?.addEventListener("click", () => setMode(nextMode(currentMode())));
 </script>
 
 <style>
@@ -81,6 +68,13 @@ const links = [
   border-bottom:1px solid var(--border);
 }
 .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo-card{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:6px 10px;border-radius:12px;background:#fff;border:1px solid var(--border);
+  box-shadow:0 2px 6px rgba(16,24,40,.06)
+}
+.logo-card img{display:block;height:28px;width:auto}
 .nav{display:flex;gap:18px}
 .nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
 .nav a:hover{border-color:var(--ink)}
