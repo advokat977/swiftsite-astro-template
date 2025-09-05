@@ -18,7 +18,10 @@ const links = [
       {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
     </nav>
 
-    <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
+    <div class="actions">
+      <button class="toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+      <button class="burger" aria-label="Menu" aria-expanded="false" title="Menu">☰</button>
+    </div>
   </div>
 </header>
 
@@ -29,12 +32,29 @@ const links = [
 </nav>
 
 <script>
-  const btn = document.querySelector(".burger");
+  // Drawer
+  const burger = document.querySelector(".burger");
   const drawer = document.querySelector(".drawer");
+  burger?.addEventListener("click", () => {
+    const open = !drawer?.hasAttribute("hidden");
+    if (open) { drawer?.setAttribute("hidden",""); burger.setAttribute("aria-expanded","false"); }
+    else { drawer?.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
+  });
+
+  // Theme toggle
+  const KEY = "swiftsite-theme";
+  const btn = document.querySelector<HTMLButtonElement>(".toggle");
+  function applyIcon(theme){ if(!btn) return; btn.textContent = theme === "dark" ? "☀️" : "🌙"; }
+  function setTheme(theme){
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem(KEY, theme); } catch(_) {}
+    applyIcon(theme);
+  }
+  // init icon prema trenutno postavljenoj temi (iz BaseLayout skripte)
+  applyIcon(document.documentElement.getAttribute("data-theme") || "light");
   btn?.addEventListener("click", () => {
-    const open = drawer?.hasAttribute("hidden") ? false : true;
-    if (open) { drawer?.setAttribute("hidden",""); btn.setAttribute("aria-expanded","false"); }
-    else { drawer?.removeAttribute("hidden"); btn.setAttribute("aria-expanded","true"); }
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    setTheme(current === "dark" ? "light" : "dark");
   });
 </script>
 
@@ -42,18 +62,29 @@ const links = [
 .shell{
   position:sticky;top:0;z-index:50;
   backdrop-filter:saturate(160%) blur(8px);
-  background:color-mix(in oklab, #ffffff 70%, transparent);
+  background:color-mix(in oklab, var(--bg) 85%, transparent);
   border-bottom:1px solid var(--border);
 }
 .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
 .nav{display:flex;gap:18px}
 .nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
 .nav a:hover{border-color:var(--ink)}
-.burger{display:none;background:transparent;border:0;font-size:22px;line-height:1}
-.drawer{background:#fff;border-bottom:1px solid var(--border)}
+.actions{display:flex;gap:10px;align-items:center}
+.toggle,.burger{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:8px 10px;line-height:1;cursor:pointer;font-size:16px;
+}
+:root[data-theme="dark"] .toggle,
+:root[data-theme="dark"] .burger{
+  background:#0f1521;border-color:#1c2330;color:var(--ink)
+}
+.drawer{background:var(--bg);border-bottom:1px solid var(--border)}
 .drawer-inner{display:flex;flex-direction:column;gap:12px;padding:14px 20px}
 @media (max-width: 880px){
   .nav{display:none}
-  .burger{display:block}
+  .burger{display:inline-block}
+}
+@media (min-width: 881px){
+  .burger{display:none}
 }
 </style>
