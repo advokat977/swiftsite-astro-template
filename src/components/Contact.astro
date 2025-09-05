@@ -1,10 +1,82 @@
 ---
-import { LINKS } from "../../swiftsite.config";
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY; // opcionalno
 ---
 <section id="contact" class="section">
-  <div class="container panel">
-    <h2>Contact us</h2>
-    <p class="lede">We’ll reply within 24 hours.</p>
-    <a class="btn primary" href={LINKS.email}>Email us</a>
+  <div class="container">
+    <div class="panel" style="padding:24px;">
+      <h2 class="mb-0">Contact us</h2>
+      <p class="lede">Tell us about your site and which plan you want.</p>
+
+      <form id="contact-form" class="form" method="POST" action="/api/contact" novalidate>
+        <div class="grid">
+          <label class="field">
+            <span>Name</span>
+            <input name="name" required placeholder="Your name"/>
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input name="email" type="email" required placeholder="you@email.com"/>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Message</span>
+          <textarea name="message" rows="6" required placeholder="What do you need?"></textarea>
+        </label>
+
+        <!-- Honeypot -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0;" aria-hidden="true"/>
+
+        {TURNSTILE_SITE_KEY && (
+          <div class="mt-2">
+            <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+            <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY}></div>
+          </div>
+        )}
+
+        <div class="mt-2">
+          <button class="btn primary" type="submit">Send message</button>
+          <span id="form-status" class="lede" style="margin-left:10px;"></span>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
+
+<style>
+.form{ margin-top: 8px; }
+.grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+
+.field{ display:grid; gap: 6px; }
+.field span{ font-weight: 700; color: var(--ink); }
+input, textarea{
+  width:100%; padding: 12px 12px; border-radius: 10px; border:1px solid var(--border);
+  background:#fff; color: var(--ink); font-size:16px;
+}
+input:focus, textarea:focus{ outline: none; border-color: color-mix(in oklab, var(--accent) 50%, black); box-shadow: 0 0 0 3px #ffe7e7; }
+</style>
+
+<script is:raw>
+document.addEventListener('submit', async (e) => {
+  const form = e.target;
+  if (form && form.id === 'contact-form') {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const status = document.getElementById('form-status');
+    btn.disabled = true; status.textContent = 'Sending…';
+
+    try{
+      const formData = new FormData(form);
+      const res = await fetch(form.action, { method: 'POST', body: formData });
+      if(!res.ok) throw new Error('Request failed');
+      status.textContent = 'Thanks — we got it.';
+      form.reset();
+    }catch(err){
+      status.textContent = 'Something went wrong. Try again.';
+    }finally{
+      btn.disabled = false;
+    }
+  }
+});
+</script>
