@@ -1,37 +1,43 @@
 ---
 const plans = [
   {
-    key: "basic",
+    id: "basic",
     name: "Basic",
+    tagline: "Essential Start",
     price: "€99 setup",
     features: [
-      "Landing page",
+      "Custom landing page",
       "Contact form (email)",
+      "Responsive design",
+      "Premium hosting",
       "SEO basics",
-      "Fast hosting",
     ],
     cta: "Choose Basic",
     popular: false,
   },
   {
-    key: "plus",
+    id: "plus",
     name: "Plus",
+    tagline: "Dynamic Engagement",
     price: "€149 setup",
     features: [
       "Everything in Basic",
-      "Calendar integration OR Zoom",
-      "Priority support",
+      "Calendar / Booking integration",
+      "Zoom / Online meeting integration",
+      "Enhanced analytics",
     ],
     cta: "Choose Plus",
     popular: true,
   },
   {
-    key: "pro",
+    id: "pro",
     name: "Pro",
+    tagline: "Full Spectrum",
     price: "€199 setup",
     features: [
-      "Everything in Basic",
-      "Calendar AND Zoom",
+      "Everything in Plus",
+      "Multi-page site (up to 5)",
+      "Custom functionality (on request)",
       "Priority support",
     ],
     cta: "Choose Pro",
@@ -39,56 +45,68 @@ const plans = [
   },
 ];
 ---
-<section id="pricing" class="section light">
-  <div class="container">
-    <header style="margin-bottom:14px">
-      <h2>Packages</h2>
-      <p class="muted">Pick what you need. Upgrade anytime.</p>
+<section id="pricing" class="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <header class="head">
+      <h2 id="pricing-title">Plans built for speed — and polish</h2>
+      <p class="lede">Pick what you need. Upgrade anytime. No hidden fees.</p>
     </header>
 
-    <div class="cards grid-3">
-      {plans.map(p => (
-        <article class={`card ${p.popular ? "pop" : ""}`}>
-          {p.popular && <div class="most">Most popular</div>}
-          <h3 class="title">{p.name}</h3>
+    <div class="grid">
+      {plans.map((p) => (
+        <article class={`card ${p.popular ? "popular" : ""}`} aria-labelledby={`plan-${p.id}`}>
+          {p.popular && <div class="ribbon" aria-hidden="true">Most popular</div>}
+          <h3 id={`plan-${p.id}`} class="plan-name">
+            <span class="kicker">{p.name}</span> {p.tagline && <span class="sub">— {p.tagline}</span>}
+          </h3>
           <div class="price">{p.price}</div>
-
-          <ul class="list" role="list">
-            {p.features.map(f => (
-              <li>✔ {f}</li>
-            ))}
+          <ul class="list">
+            {p.features.map(f => <li>{f}</li>)}
           </ul>
-
-          <a href="#contact" class={`btn ${p.popular ? "gold" : "ghost"}`}>{p.cta}</a>
+          <a class="btn" href={`#contact`} data-plan={p.id}>{p.cta}</a>
         </article>
       ))}
     </div>
 
-    <p class="foot muted" style="margin-top:12px">
-      <strong>Plus</strong> includes <em>Calendar OR Zoom</em> (one add-on). <strong>Pro</strong> includes both: <em>Calendar AND Zoom</em>. No hidden fees. Upgrade anytime.
+    <p class="footnote">
+      <strong>Plus</strong> includes <em>Calendar OR Zoom</em> (one add-on). <strong>Pro</strong> includes both.
     </p>
   </div>
 </section>
 
 <style>
-.cards .card{
-  background:#fff;border:1px solid #e7e9ee;border-radius:18px;
-  padding:22px 20px 20px;box-shadow:0 18px 40px rgba(16,24,40,.08);display:flex;flex-direction:column;gap:12px
+.pricing{padding:56px 0;background:#faf9f7}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+.head{text-align:center;margin-bottom:22px}
+.head h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 6px;font-weight:900;letter-spacing:-.01em}
+.head .lede{color:#606973;margin:0}
+.grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch
 }
-.cards .card .title{font-size:20px;margin:0;color:#111827}
-.cards .card .price{font-weight:800;color:#111827}
-.cards .card .list{margin:2px 0 8px;padding:0 0 0 2px;list-style:none;color:#1f2937}
-.cards .card .list li{margin:6px 0}
-
-.card.pop{position:relative;background:linear-gradient(180deg,#0f1521,#0b1019);color:#e7ebf5;border-color:#1f2836;box-shadow:var(--shadow-lg)}
-.card.pop .title,.card.pop .price{color:#fff}
-.card.pop .list{color:#cfd6e4}
-.most{
-  position:absolute;top:-12px;left:20px;transform:translateY(-50%);
-  background:rgba(202,168,106,.18);color:#7a602f;border:1px solid rgba(202,168,106,.35);
-  font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px
+@media (max-width:900px){ .grid{grid-template-columns:1fr;gap:14px} }
+.card{
+  background:#fff;border:1px solid #eee;border-radius:18px;padding:20px 18px 18px;
+  box-shadow:0 14px 32px rgba(16,24,40,.08);position:relative;display:flex;flex-direction:column
 }
-
-.cards .btn{margin-top:auto}
-.foot em{font-style:italic}
+.card.popular{border-color:#e7d2b3;box-shadow:0 20px 40px rgba(176,125,66,.18)}
+.ribbon{
+  position:absolute;top:12px;right:12px;background:#f3e4cf;color:#8b612c;font-weight:800;
+  font-size:12px;padding:6px 8px;border-radius:999px
+}
+.plan-name{margin:0 0 2px;font-size:20px}
+.kicker{font-weight:900}
+.sub{color:#7a838f;font-weight:600}
+.price{margin:2px 0 10px;font-weight:900;color:#1d1f24}
+.list{margin:0 0 16px;padding:0;list-style:none;flex:1}
+.list li{
+  display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed #eee;color:#2a2f36
+}
+.list li::before{content:"✓";color:#b07a3a;font-weight:900}
+.btn{
+  align-self:flex-start;text-decoration:none;font-weight:800;color:#fff;
+  background:linear-gradient(180deg,#d9b07a 0%,#b3864f 100%);padding:10px 14px;border-radius:12px;
+  box-shadow:0 8px 22px rgba(176,125,66,.26)
+}
+.btn:hover{filter:brightness(.96)}
+.footnote{margin:16px 0 0;color:#6b737d;text-align:center}
 </style>
