@@ -1,10 +1,10 @@
 ---
-import { SITE, THEME } from "../../swiftsite.config";
+import { SITE, THEME, ASSETS } from "../../swiftsite.config";
 
 const {
   title = SITE.title,
   description = SITE.description,
-  ogImage = "/og.png",
+  ogImage = ASSETS.og,
   lang = SITE.lang,
 } = Astro.props;
 ---
@@ -25,7 +25,7 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/globals.css" />
 
-    <!-- Light (iz configa) i Dark override -->
+    <!-- LIGHT iz configa + DARK override -->
     <style>
       :root{
         --bg:{THEME.bg};
@@ -46,32 +46,24 @@ const {
       }
     </style>
 
-    <!-- Inicijalizacija teme + ‘system’ praćenje, bez treptanja -->
+    <!-- Inicijalizacija teme + ‘system’ praćenje -->
     <script id="theme-init">
       (() => {
-        const KEY = "swiftsite-theme";            // light | dark | system
+        const KEY = "swiftsite-theme"; // light | dark | system
         const mq  = window.matchMedia("(prefers-color-scheme: dark)");
         const saved = (()=>{ try { return localStorage.getItem(KEY) } catch(_) { return null } })();
         const mode = saved || "system";
-
         function apply(mode){
-          // Sačuvaj mod (light/dark/system)
           try { localStorage.setItem(KEY, mode) } catch(_) {}
           document.documentElement.setAttribute("data-theme-mode", mode);
           const effective = mode === "system" ? (mq.matches ? "dark" : "light") : mode;
           document.documentElement.setAttribute("data-theme", effective);
         }
-
-        // Prvo postavljanje
         apply(mode);
-
-        // Ako je 'system' – reaguj na promjenu OS teme
         mq.addEventListener?.("change", () => {
           const current = document.documentElement.getAttribute("data-theme-mode") || "system";
           if (current === "system") apply("system");
         });
-
-        // Eksponiraj pomoćnu funkciju za header toggle
         window.__setThemeMode = apply;
       })();
     </script>
