@@ -1,38 +1,28 @@
 ---
 import { PACKAGES } from "../../swiftsite.config";
 ---
-<section class="pricing">
-  <h2>Packages</h2>
-  <p class="sub">Choose the plan that fits your needs.</p>
-  <div class="grid">
-    {PACKAGES.map(p => (
-      <div class="card">
-        <h3>{p.name}</h3>
-        <div class="price">{p.price}</div>
-        <p class="desc">{p.desc}</p>
-        <ul>{p.features.map(f => <li>{f}</li>)}</ul>
-      </div>
-    ))}
+<section class="section">
+  <div class="container">
+    <h2>Packages</h2>
+    <p class="lede">Pick what you need. Upgrade anytime.</p>
+    <div class="grid cards">
+      {PACKAGES.map(p => (
+        <article class="card">
+          <h3>{p.name}</h3>
+          <div class="price">{p.price}</div>
+          <p class="muted">{p.desc}</p>
+          <ul class="feat">
+            {p.features.map(f => <li>{f}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
-.pricing{padding:60px 20px;text-align:center}
-.pricing h2{font-size:34px;margin:0}
-.sub{color:var(--muted);margin:8px 0 40px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
-.card{
-  background:#fff;
-  border:1px solid #eee;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 2px 6px #0000000d;
-  text-align:left;
-  transition:transform 0.2s ease,box-shadow 0.2s ease;
-}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 20px #00000014}
-.card h3{margin:0 0 6px;font-size:20px}
-.price{font-size:18px;font-weight:700;margin:6px 0 12px;color:var(--accent)}
-.desc{color:var(--muted);margin:0 0 12px}
-ul{margin:0;padding-left:18px;color:var(--ink)}
+.cards .card{min-height:260px}
+.price{font-weight:700;color:var(--accent);margin:6px 0 10px}
+.feat{margin:8px 0 0 0;padding-left:18px}
+.feat li{margin:4px 0}
 </style>
