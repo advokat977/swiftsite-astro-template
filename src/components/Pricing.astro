@@ -1,0 +1,26 @@
+---
+import { PACKAGES } from "../../swiftsite.config";
+---
+<section class="pricing">
+  <h2>Packages</h2>
+  <div class="grid">
+    {PACKAGES.map(p => (
+      <div class="card">
+        <h3>{p.name}</h3>
+        <div class="price">{p.price}</div>
+        <p class="desc">{p.desc}</p>
+        <ul>{p.features.map(f => <li>{f}</li>)}</ul>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+.pricing h2{font-size:28px;margin:32px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:12px}
+.card h3{margin:0 0 6px}
+.price{font-weight:700;margin:4px 0 8px}
+.desc{color:var(--muted);margin:0 0 10px}
+ul{padding-left:18px;margin:0}
+</style>
