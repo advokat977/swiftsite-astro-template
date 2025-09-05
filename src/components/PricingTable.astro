@@ -1,45 +1,24 @@
 ---
 const plans = [
-  {
-    key: "basic",
-    name: "Basic",
-    price: "€99 setup",
-    badge: null,
-    highlight: false,
-    cta: { label: "Choose Basic", href: "#contact" },
-    features: { landing:true, contact:true, seo:true, hosting:true, calendar:false, zoom:false, priority:false }
-  },
-  {
-    key: "plus",
-    name: "Plus",
-    price: "€149 setup",
-    badge: "Most popular",
-    highlight: true,
-    cta: { label: "Choose Plus", href: "#contact" },
-    features: { landing:true, contact:true, seo:true, hosting:true, calendar:true, zoom:true, priority:false } // OR logic in footnote
-  },
-  {
-    key: "pro",
-    name: "Pro",
-    price: "€199 setup",
-    badge: null,
-    highlight: false,
-    cta: { label: "Choose Pro", href: "#contact" },
-    features: { landing:true, contact:true, seo:true, hosting:true, calendar:true, zoom:true, priority:true }
-  },
+  { key:"basic", name:"Basic", price:"€99 setup", badge:null, highlight:false, cta:{label:"Choose Basic", href:"#contact"},
+    features:{ landing:true, contact:true, seo:true, hosting:true, calendar:false, zoom:false, priority:false } },
+  { key:"plus",  name:"Plus",  price:"€149 setup", badge:"Most popular", highlight:true,  cta:{label:"Choose Plus",  href:"#contact"},
+    features:{ landing:true, contact:true, seo:true, hosting:true, calendar:true,  zoom:true,  priority:false } }, /* OR in footnote */
+  { key:"pro",   name:"Pro",   price:"€199 setup", badge:null, highlight:false, cta:{label:"Choose Pro",   href:"#contact"},
+    features:{ landing:true, contact:true, seo:true, hosting:true, calendar:true,  zoom:true,  priority:true  } },
 ];
 
 const rows = [
-  { key: "landing",  label: "Landing page" },
-  { key: "contact",  label: "Contact form (email)" },
-  { key: "seo",      label: "SEO basics" },
-  { key: "hosting",  label: "Fast hosting" },
-  { key: "calendar", label: "Calendar integration" },
-  { key: "zoom",     label: "Zoom integration" },
-  { key: "priority", label: "Priority support" },
+  { key:"landing",  label:"Landing page" },
+  { key:"contact",  label:"Contact form (email)" },
+  { key:"seo",      label:"SEO basics" },
+  { key:"hosting",  label:"Fast hosting" },
+  { key:"calendar", label:"Calendar integration" },
+  { key:"zoom",     label:"Zoom integration" },
+  { key:"priority", label:"Priority support" },
 ];
 ---
-<section id="pricing" class="section pricing">
+<section id="pricing" class="section">
   <div class="container">
     <header class="head">
       <h2>Packages</h2>
@@ -49,30 +28,20 @@ const rows = [
     <div class="table-wrap" role="region" aria-labelledby="pricing-table">
       <table class="pricing-table" id="pricing-table" aria-describedby="pricing-footnote">
         <colgroup>
-          <col class="c-feat"/>
-          <col class="c-plan"/>
-          <col class="c-plan"/>
-          <col class="c-plan"/>
+          <col class="c-feat"/><col class="c-plan"/><col class="c-plan"/><col class="c-plan"/>
         </colgroup>
 
         <thead>
-          <!-- badges red -->
           <tr class="badges">
             <th></th>
-            {plans.map(p => (
-              <th>{p.badge && <span class="badge">{p.badge}</span>}</th>
-            ))}
+            {plans.map(p => <th>{p.badge && <span class="badge">{p.badge}</span>}</th>)}
           </tr>
-
-          <!-- imena + cijena u jednoj liniji -->
           <tr>
             <th class="feat-col" scope="col">What’s included</th>
             {plans.map(p => (
               <th scope="col" class={`plan-col ${p.highlight ? "highlight" : ""}`}>
                 <div class="plan-top">
-                  <span class="plan-name">{p.name}</span>
-                  <span class="plan-sep">•</span>
-                  <span class="plan-price">{p.price}</span>
+                  <span class="plan-name">{p.name}</span><span class="plan-sep">•</span><span class="plan-price">{p.price}</span>
                 </div>
                 <a class={`btn choose ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a>
               </th>
@@ -81,13 +50,11 @@ const rows = [
         </thead>
 
         <tbody>
-          {rows.map((r, i) => (
-            <tr class={i % 2 ? "zebra" : ""}>
+          {rows.map((r,i)=>(
+            <tr class={i%2?"zebra":""}>
               <th scope="row" class="feat-label">{r.label}</th>
               {plans.map(p => (
-                <td class="tick">
-                  {p.features[r.key] ? <span class="yes" aria-label="Included">✓</span> : <span class="no" aria-label="Not included">—</span>}
-                </td>
+                <td class="tick">{p.features[r.key] ? <span class="yes" aria-label="Included">✓</span> : <span class="no" aria-label="Not included">—</span>}</td>
               ))}
             </tr>
           ))}
@@ -96,9 +63,7 @@ const rows = [
         <tfoot>
           <tr class="cta-row">
             <th scope="row" class="feat-label">Get started</th>
-            {plans.map(p => (
-              <td><a class={`btn choose wide ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a></td>
-            ))}
+            {plans.map(p => <td><a class={`btn choose wide ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a></td>)}
           </tr>
         </tfoot>
       </table>
@@ -108,19 +73,15 @@ const rows = [
       </p>
     </div>
 
-    <!-- Mobile cards -->
+    <!-- Mobile -->
     <div class="cards" aria-label="Pricing cards (mobile)">
-      {plans.map(p => (
-        <article class={`card ${p.highlight ? "highlight" : ""}`}>
+      {plans.map(p=>(
+        <article class={`card ${p.highlight?"highlight":""}`}>
           {p.badge && <span class="badge">{p.badge}</span>}
           <h3>{p.name}</h3>
           <div class="price">{p.price}</div>
           <ul class="list">
-            {rows.map(r => (
-              <li class={p.features[r.key] ? "yes" : "no"}>
-                {p.features[r.key] ? "✓" : "—"} {r.label}
-              </li>
-            ))}
+            {rows.map(r => <li class={p.features[r.key]?"yes":"no"}>{p.features[r.key]?"✓":"—"} {r.label}</li>)}
           </ul>
           <a class={`btn choose ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a>
         </article>
@@ -130,74 +91,36 @@ const rows = [
 </section>
 
 <style>
-.pricing .head{ margin-bottom: var(--s-2); }
-
-/* tabela */
-.table-wrap{ overflow-x:auto; }
+.table-wrap{overflow-x:auto}
 .pricing-table{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius: var(--radius);
-  border-collapse: separate; border-spacing: 0;
-  background:#fff;
-  box-shadow: 0 12px 26px rgba(16,24,40,.08);
+  width:100%;border:1px solid var(--border);border-radius:var(--radius);
+  border-collapse:separate;border-spacing:0;background:#fff;box-shadow:0 12px 26px rgba(16,24,40,.08)
 }
+.c-feat{width:42%;min-width:300px}.c-plan{width:19%;min-width:200px}
 
-.c-feat{ width: 42%; min-width: 300px; }
-.c-plan{ width: 19%; min-width: 200px; }
+.pricing-table thead th{text-align:left;padding:12px 16px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+.badges th{height:32px;padding:8px 16px 0}
+.badge{display:inline-block;font-size:12px;font-weight:700;line-height:1;color:var(--accent);background:#fff3f3;border:1px solid #ffd5d5;padding:5px 8px;border-radius:999px}
+.plan-col .plan-top{display:flex;align-items:baseline;gap:8px;font-weight:700}
+.plan-sep{color:var(--muted)} .plan-price{color:var(--muted);font-weight:700}
+.btn.choose{margin-top:8px} .btn.choose.wide{width:100%}
 
-.pricing-table thead th{
-  text-align:left; padding: 12px 16px 16px; border-bottom:1px solid var(--border);
-  vertical-align: top;
-}
-.badges th{ height: 32px; padding: 8px 16px 0; }
-.badge{
-  display:inline-block; font-size:12px; font-weight:700; line-height:1;
-  color: var(--accent); background:#fff3f3; border:1px solid #ffd5d5;
-  padding:5px 8px; border-radius: 999px;
-}
+.pricing-table tbody td,.pricing-table tbody th{padding:14px 16px;border-bottom:1px solid var(--border)}
+.zebra td,.zebra th{background:color-mix(in oklab,var(--panel) 60%, transparent)}
+.feat-label{font-weight:600;color:var(--ink)}
+.tick{text-align:center}
+.tick .yes,.tick .no{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-weight:700}
+.tick .yes{color:var(--accent);background:#fff4f4;border:1px solid #ffd6d6}
+.tick .no{color:var(--muted)}
+.cta-row td{background:color-mix(in oklab,var(--panel) 65%, transparent)}
+.footnote{font-size:13px;color:var(--muted);margin:10px 4px 0}
 
-.plan-col .plan-top{ display:flex; align-items:baseline; gap:8px; font-weight:700; }
-.plan-name{ font-weight:700; }
-.plan-sep{ color: var(--muted); }
-.plan-price{ color: var(--muted); font-weight:700; }
-
-.btn.choose{ margin-top:8px; }
-.btn.choose.wide{ width:100%; }
-
-.pricing-table tbody td, .pricing-table tbody th{
-  padding: 14px 16px; border-bottom:1px solid var(--border);
-}
-.zebra td, .zebra th{ background: color-mix(in oklab, var(--panel) 60%, transparent); }
-
-.feat-label{ font-weight:600; color: var(--ink); }
-.tick{ text-align:center; }
-.tick .yes, .tick .no{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:22px; height:22px; border-radius:6px; font-weight:700;
-}
-.tick .yes{ color: var(--accent); background:#fff4f4; border:1px solid #ffd6d6; }
-.tick .no{ color: var(--muted); }
-
-.cta-row td{ background: color-mix(in oklab, var(--panel) 65%, transparent); }
-
-.footnote{ font-size: 13px; color: var(--muted); margin: 10px 4px 0; }
-
-/* Mobile cards */
-.cards{ display:none; margin-top: var(--s-2); }
-.card{
-  background:#fff; border:1px solid var(--border); border-radius: var(--radius);
-  box-shadow: 0 12px 26px rgba(16,24,40,.08);
-  padding: 18px; display:grid; gap: 10px;
-}
-.card.highlight{ border-color:#ffd5d5; box-shadow: 0 14px 30px rgba(177,28,28,.12); }
-.card h3{ margin:0; font-size:20px; }
-.card .price{ color: var(--muted); font-weight:700; }
-.card .list{ list-style:none; margin:4px 0 8px; padding:0; display:grid; gap:6px; }
-.card .list li.no{ color: var(--muted); }
-
-@media (max-width: 900px){
-  .pricing-table{ display:none; }
-  .cards{ display:grid; grid-template-columns:1fr; gap:14px; }
-}
+/* Mobile */
+.cards{display:none;margin-top:var(--s-2)}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 12px 26px rgba(16,24,40,.08);padding:18px;display:grid;gap:10px}
+.card.highlight{border-color:#ffd5d5;box-shadow:0 14px 30px rgba(177,28,28,.12)}
+.card .price{color:var(--muted);font-weight:700}
+.card .list{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:6px}
+.card .list li.no{color:var(--muted)}
+@media (max-width:900px){.pricing-table{display:none}.cards{display:grid;grid-template-columns:1fr;gap:14px}}
 </style>
