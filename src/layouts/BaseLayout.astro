@@ -1,72 +1,73 @@
 ---
-import { SITE, THEME, ASSETS } from "../../swiftsite.config";
-
-const {
-  title = SITE.title,
-  description = SITE.description,
-  ogImage = ASSETS.og,
-  lang = SITE.lang,
-} = Astro.props;
+const title = "SwiftSite — Launch your site in 72h";
+const desc =
+  "Streamlined web development. Premium craft, zero hassle. Your vision, live in 72 hours.";
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <link rel="icon" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/globals.css" />
+    <meta name="description" content={desc} />
 
-    <!-- LIGHT iz configa + DARK override -->
+    <!-- Fonts (from your snippet) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
       :root{
-        --bg:{THEME.bg};
-        --panel:{THEME.panel};
-        --ink:{THEME.ink};
-        --muted:{THEME.muted};
-        --accent:{THEME.accent};
-        --border:#e6e8ee;
-        --max:1120px;
+        --champagne:#D4C9A8;
+        --champagne-2:#E7E0D2;
+        --dark:#0A192F; /* dark blue */
+        --ink:#1d1f24;
+        --muted:#606973;
+        --bg:#F7F7F7;
+        --card:#fff;
+        --border:#ececec;
       }
-      :root[data-theme="dark"]{
-        --bg:#0d1117;
-        --panel:#0f1521;
-        --ink:#e6e9ef;
-        --muted:#aeb6c2;
-        --accent:#e24343;
-        --border:#222834;
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;background:var(--bg);color:var(--ink);
+        font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        line-height:1.6;
       }
-    </style>
+      .container{max-width:1200px;margin:0 auto;padding:0 32px}
+      .section{padding:96px 0}
+      .btn{
+        display:inline-block;border:0;border-radius:12px;cursor:pointer;
+        font-weight:800;text-decoration:none;padding:12px 18px
+      }
+      .btn.primary{
+        background:linear-gradient(180deg,#E4D5B5 0%, var(--champagne) 55%, #B5915E 100%);
+        color:#121212; box-shadow:0 10px 26px rgba(176,125,66,.28)
+      }
+      .btn.primary:hover{filter:brightness(.97)}
+      .btn.ghost{background:transparent;color:var(--ink);font-weight:800}
+      .btn.ghost:hover{text-decoration:underline}
 
-    <!-- Inicijalizacija teme + ‘system’ praćenje -->
-    <script id="theme-init">
-      (() => {
-        const KEY = "swiftsite-theme"; // light | dark | system
-        const mq  = window.matchMedia("(prefers-color-scheme: dark)");
-        const saved = (()=>{ try { return localStorage.getItem(KEY) } catch(_) { return null } })();
-        const mode = saved || "system";
-        function apply(mode){
-          try { localStorage.setItem(KEY, mode) } catch(_) {}
-          document.documentElement.setAttribute("data-theme-mode", mode);
-          const effective = mode === "system" ? (mq.matches ? "dark" : "light") : mode;
-          document.documentElement.setAttribute("data-theme", effective);
-        }
-        apply(mode);
-        mq.addEventListener?.("change", () => {
-          const current = document.documentElement.getAttribute("data-theme-mode") || "system";
-          if (current === "system") apply("system");
-        });
-        window.__setThemeMode = apply;
-      })();
-    </script>
+      /* cards */
+      .card{
+        background:var(--card);border:1px solid var(--border);border-radius:18px;
+        box-shadow:0 14px 32px rgba(16,24,40,.08)
+      }
+
+      /* heading helpers */
+      .h2{
+        font-family:"Playfair Display",serif;
+        font-weight:900;letter-spacing:-.01em;
+        font-size:clamp(28px,3.6vw,40px);margin:0 0 6px
+      }
+      .lede{color:var(--muted);margin:0}
+
+      /* smooth anchors */
+      html{scroll-behavior:smooth}
+    </style>
   </head>
   <body>
     <slot />
