@@ -1,105 +1,23 @@
 ---
-import { SITE, FEATURES, ASSETS } from "../../swiftsite.config";
-
-const links = [
-  { href: "/", label: "Home" },
-  FEATURES.gallery && { href: "/gallery", label: "Gallery" },
-  FEATURES.blog && { href: "/insights", label: "Insights" },
-  { href: "/thanks", label: "Thanks" },
-].filter(Boolean);
 ---
-<header class="shell">
+<header class="site-header">
   <div class="container bar">
-    <a class="brand" href="/" aria-label={SITE.title}>
-      <img
-        class="logo-img"
-        src={ASSETS.logoLight}
-        alt="SwiftSite"
-        width="240" height="52"
-        loading="eager"
-        decoding="async"
-      />
-    </a>
-
     <nav class="nav">
-      {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
+      <a href="/" class="nav-link">Home</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="/thanks" class="nav-link">Thanks</a>
+      <a href="#contact" class="btn primary">Get in touch</a>
     </nav>
-
-    <div class="actions">
-      <button class="toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
-      <button class="burger" aria-label="Menu" aria-expanded="false" title="Menu">☰</button>
-    </div>
   </div>
 </header>
 
-<nav class="drawer" hidden>
-  <div class="container drawer-inner">
-    {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
-  </div>
-</nav>
-
-<script>
-  // Drawer
-  const burger = document.querySelector(".burger");
-  const drawer = document.querySelector(".drawer");
-  burger?.addEventListener("click", () => {
-    const open = !drawer?.hasAttribute("hidden");
-    if (open) { drawer?.setAttribute("hidden",""); burger.setAttribute("aria-expanded","false"); }
-    else { drawer?.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
-  });
-
-  // Theme toggle: light → dark → system → light
-  const KEY = "swiftsite-theme";
-  const btn = document.querySelector<HTMLButtonElement>(".toggle");
-  function iconFor(mode){ return mode === "dark" ? "☀️" : mode === "light" ? "🖥️" : "🌙"; }
-  function nextMode(mode){ return mode === "light" ? "dark" : mode === "dark" ? "system" : "light"; }
-  function currentMode(){ return document.documentElement.getAttribute("data-theme-mode") || "system"; }
-  function setMode(mode){
-    (window as any).__setThemeMode?.(mode);
-    try { localStorage.setItem(KEY, mode) } catch(_) {}
-    if(btn){ btn.textContent = iconFor(mode); btn.setAttribute("title", `Theme: ${mode}`); }
-  }
-  setMode(currentMode());
-  btn?.addEventListener("click", () => setMode(nextMode(currentMode())));
-</script>
-
 <style>
-.shell{
-  position:sticky;top:0;z-index:50;
-  backdrop-filter:saturate(160%) blur(8px);
-  background:color-mix(in oklab, var(--bg) 85%, transparent);
-  border-bottom:1px solid var(--border);
-}
-.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-.brand{display:flex;align-items:center}
-.logo-img{
-  height:32px; width:auto;
-  image-rendering:-webkit-optimize-contrast;
-  filter: drop-shadow(0 0 0 rgba(0,0,0,0)); /* sprječava blur u nekim browserima */
-}
-:root[data-theme="dark"] .logo-img{
-  /* malo “svjetlosti” oko loga da ostane čitljiv u dark-u */
-  filter: drop-shadow(0 0 1px rgba(255,255,255,.25));
-}
-.nav{display:flex;gap:18px}
-.nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
-.nav a:hover{border-color:var(--ink)}
-.actions{display:flex;gap:10px;align-items:center}
-.toggle,.burger{
-  background:#fff;border:1px solid var(--border);border-radius:10px;
-  padding:8px 10px;line-height:1;cursor:pointer;font-size:16px;
-}
-:root[data-theme="dark"] .toggle,
-:root[data-theme="dark"] .burger{
-  background:#0f1521;border-color:#1c2330;color:var(--ink)
-}
-.drawer{background:var(--bg);border-bottom:1px solid var(--border)}
-.drawer-inner{display:flex;flex-direction:column;gap:12px;padding:14px 20px}
-@media (max-width: 880px){
-  .nav{display:none}
-  .burger{display:inline-block}
-}
-@media (min-width: 881px){
-  .burger{display:none}
+.site-header{ position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1px solid var(--border); }
+.bar{ display:flex; align-items:center; height: 64px; }
+.nav{ display:flex; align-items:center; gap: 14px; margin-left:auto; }
+.nav-link{ padding: 8px 10px; color: var(--muted); font-weight: 600; }
+.nav-link:hover{ color: var(--ink); }
+@media (max-width: 720px){
+  .nav-link:nth-child(2){ display:none; } /* skrivamo Pricing link na malom ekranu */
 }
 </style>
