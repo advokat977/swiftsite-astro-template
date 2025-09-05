@@ -3,7 +3,7 @@ import Base from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
-import PricingTable from "../components/PricingTable.astro";
+import Pricing from "../components/Pricing.astro";
 import FAQ from "../components/FAQ.astro";
 import Contact from "../components/Contact.astro";
 import CalendarBlock from "../components/CalendarBlock.astro";
@@ -15,16 +15,17 @@ import { FEATURES } from "../../swiftsite.config";
 
   <main>
     {FEATURES.hero && <Hero />}
-    {FEATURES.pricing && <PricingTable />}
+    {FEATURES.pricing && <Pricing />}
+    {FEATURES.faq && <FAQ />}
 
-    {/* FAQ odmah poslije pricinga */}
-    <FAQ />
+    <section class="section">
+      <div class="container">
+        {FEATURES.calendar && <div class="panel" style="padding:16px;"><CalendarBlock /></div>}
+        {FEATURES.zoom && <div class="panel mt-4" style="padding:16px;"><ZoomBlock /></div>}
+      </div>
+    </section>
 
-    <div class="container mt-24">
-      {FEATURES.calendar && <div class="panel"><CalendarBlock /></div>}
-      {FEATURES.zoom && <div class="panel mt-24"><ZoomBlock /></div>}
-      {FEATURES.contact && <div class="mt-24"><Contact /></div>}
-    </div>
+    {FEATURES.contact && <Contact />}
   </main>
 
   <Footer />
