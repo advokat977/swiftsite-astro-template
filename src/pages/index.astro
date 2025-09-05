@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+---
+<Base title="SwiftSite Template — Astro + Cloudflare">
+  <header class="container" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid;border-color:#ffffff18">
+    <strong>SwiftSite</strong>
+    <nav style="display:flex;gap:16px">
+      <a href="/">Home</a>
+      <a href="/thanks">Thanks</a>
+    </nav>
+  </header>
+
+  <main class="container" style="padding:30px 20px">
+    <h1 style="font-size:40px;line-height:1.1;margin:0 0 10px">It works 🎉</h1>
+    <p style="color:var(--muted);max-width:720px">
+      Ovo je minimalni Astro + Cloudflare skeleton. U sljedećim fazama dodaćemo komponente (Contact form, Calendar, Zoom) i config za pakete.
+    </p>
+  </main>
+
+  <footer class="container" style="border-top:1px solid;border-color:#ffffff18;text-align:center;padding:16px;color:var(--muted)">
+    © <script>document.write(new Date().getFullYear())</script> SwiftSite
+  </footer>
+</Base>
