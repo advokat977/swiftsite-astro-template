@@ -1,0 +1,23 @@
+---
+import { SITE } from "../../swiftsite.config";
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/thanks", label: "Thanks" },
+];
+---
+<header class="container header">
+  <strong>{SITE.title}</strong>
+  <nav>
+    {links.map(l => <a href={l.href}>{l.label}</a>)}
+  </nav>
+</header>
+
+<style>
+.header{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--border);padding:12px 0
+}
+.header nav{display:flex;gap:16px}
+.header a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent}
+.header a:hover{border-color:var(--ink)}
+</style>
