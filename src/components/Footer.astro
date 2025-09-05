@@ -2,13 +2,17 @@
 import { SITE } from "../../swiftsite.config";
 const year = new Date().getFullYear();
 ---
-<footer class="container footer">
-  © {year} {SITE.title}
+<footer class="footer">
+  <p>© {year} {SITE.title} — All rights reserved</p>
 </footer>
 
 <style>
 .footer{
-  border-top:1px solid var(--border);
-  text-align:center;padding:14px;color:var(--muted)
+  text-align:center;
+  padding:30px 20px;
+  color:var(--muted);
+  font-size:14px;
+  border-top:1px solid #eee;
+  margin-top:60px
 }
 </style>
