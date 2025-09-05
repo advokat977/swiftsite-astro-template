@@ -6,37 +6,37 @@ export const SITE = {
     "Ultra-brzi sajtovi sa minimalnom konfiguracijom. Landing + mail + calendar + Zoom.",
   lang: "en",
   author: "SwiftSite",
-  url: "https://example.com", // postavi kad dodaš domen
+  url: "https://example.com" // postavi kad dodaš domen
 };
 
-// Tema (boje)
+// Tema (LIGHT default)
 export const THEME = {
   bg: "#ffffff",
   panel: "#f8f9fb",
   ink: "#111111",
-  muted: "#555555",
+  muted: "#666a73",
   accent: "#b11c1c"
 };
 
-// Linkovi za akcije (postavi kad imaš prave adrese)
+// Linkovi za akcije (postavi prave adrese po potrebi)
 export const LINKS = {
   email: "mailto:hello@example.com",
-  calendar: "https://cal.com/yourname/intro", // ili ostavi "#"
-  zoom: "https://zoom.us/j/1234567890",       // ili "#"
+  calendar: "#",
+  zoom: "#"
 };
 
-// Uključene funkcionalnosti (palimo/gasimo sekcije)
+// Uključene funkcionalnosti
 export const FEATURES = {
   hero: true,
   pricing: true,
-  contact: true,   // placeholder (prava forma stiže u Fazi 4)
-  calendar: false, // Cal.com embed/CTA
-  zoom: false,     // Zoom CTA
-  gallery: false,  // stranica sa gridom slika
-  blog: false      // "Insights" placeholder
+  contact: true,
+  calendar: false,
+  zoom: false,
+  gallery: false,
+  blog: false
 };
 
-// Paketna logika (za SwiftSite)
+// Paketi
 export const PACKAGES = [
   {
     slug: "basic",
@@ -60,3 +60,11 @@ export const PACKAGES = [
     features: ["Sve iz Basic", "Calendar AND Zoom integracija"]
   }
 ];
+
+// Brend asseti (ovdje samo navodimo putanje iz /public)
+export const ASSETS = {
+  logoLight: "/brand/swiftsite-logo.png", // ova koju si dodao
+  logoDark: "/brand/swiftsite-logo.png",  // može ista; kasnije možemo dodati tamnu varijantu
+  og: "/brand/swiftsite-logo.png",        // privremeni OG (1200x630 može kasnije)
+  favicon: "/favicon.svg"                 // zamijeni kad spremiš novi favicon
+};
