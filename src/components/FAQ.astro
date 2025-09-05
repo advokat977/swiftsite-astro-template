@@ -1,30 +1,31 @@
 ---
 const faqs = [
   {
-    q: "Šta tačno dobijam u roku 72h?",
-    a: "Jednostavan, brz landing sa uključeno: kontakt forma (email), osnovni SEO, brzo hostovanje na Cloudflare Pages. Po želji uključujemo kalendar ili Zoom (Plus/Pro paketi)."
+    q: "What exactly do I get within 72h?",
+    a: "A simple, fast landing page including: contact form (email), basic SEO, and fast hosting on Cloudflare Pages. If you choose, we also include calendar or Zoom integration (Plus/Pro plans)."
   },
   {
-    q: "Da li je hosting uključen u cijenu?",
-    a: "Da. Koristimo Cloudflare Pages (besplatno za ovaj tip sajtova). Nema skrivenih troškova. Domen, ako želiš prilagođeni, plaća se odvojeno kod registra (Cloudflare, Namecheap…)."
+    q: "Is hosting included in the price?",
+    a: "Yes. We use Cloudflare Pages (free for this type of site). There are no hidden fees. A custom domain, if you want one, is paid separately to a registrar (Cloudflare, Namecheap, etc.)."
   },
   {
-    q: "Kako se rješava spam ako nema javne email adrese?",
-    a: "Kontakt forma šalje poruke serverless putem (bez izlaganja email adrese). Dodajemo i anti-spam zaštitu (Cloudflare Turnstile)."
+    q: "How do you prevent spam if there is no public email address?",
+    a: "The contact form sends messages via a serverless function (your email is never exposed). We also add anti-spam protection with Cloudflare Turnstile."
   },
   {
-    q: "Mogu li kasnije nadograditi paket?",
-    a: "Naravno. Sa Basic na Plus ili Pro u bilo kom trenutku — samo uključimo dodatne komponente i objavimo novu verziju."
+    q: "Can I upgrade my plan later?",
+    a: "Of course. You can move from Basic to Plus or Pro at any time — we simply enable additional components and publish a new version."
   },
   {
-    q: "Šta ako nemam sadržaj spreman?",
-    a: "Možemo postaviti placeholder tekst i slike, pa naknadno zamijeniti. Sajt ostaje brz i spreman dok ti finalizuješ sadržaj."
+    q: "What if I don’t have content ready?",
+    a: "We can set up placeholder text and images, then replace them later. Your site stays fast and live while you finalize your content."
   },
   {
-    q: "Imam li pristup kodu i verzijama?",
-    a: "Da. Kod je u Git repozitorijumu; objava ide ručno preko Cloudflare build hooka. Možeš pratiti i vraćati verzije kad god treba."
+    q: "Do I have access to code and versions?",
+    a: "Yes. The code lives in a Git repository; publishing is done manually via Cloudflare build hook. You can track and roll back versions anytime."
   },
 ];
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -39,7 +40,7 @@ const faqSchema = {
   <div class="container">
     <header class="head">
       <h2>FAQ</h2>
-      <p class="lede">Kratko i jasno — najčešća pitanja i odgovori.</p>
+      <p class="lede">Straight to the point — most common questions and answers.</p>
     </header>
 
     <div class="grid">
@@ -52,7 +53,7 @@ const faqSchema = {
     </div>
 
     <div class="cta-wrap">
-      <a class="btn primary" href="#contact">Još pitanja? Piši nam</a>
+      <a class="btn primary" href="#contact">More questions? Contact us</a>
     </div>
   </div>
 
