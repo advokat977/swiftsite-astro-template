@@ -1,49 +1,59 @@
 ---
 const faqs = [
-  { q:"What exactly do I get within 72 hours?", a:"A fast landing with: contact form (email), basic SEO, fast hosting on Cloudflare Pages. Optional Calendar or Zoom (Plus/Pro)." },
-  { q:"Is hosting included?", a:"Yes. Cloudflare Pages (free for this type of sites). No hidden fees. Custom domain is separate (Cloudflare, Namecheap…)." },
-  { q:"How do you handle spam without a public email address?", a:"The contact form sends serverlessly (email not exposed). We add Cloudflare Turnstile for anti-spam." },
-  { q:"Can I upgrade later?", a:"Sure. From Basic to Plus or Pro anytime — we enable the extra components and deploy a new version." },
-  { q:"No content yet?", a:"We can ship placeholders first; you replace later. The site stays fast and live meanwhile." },
-  { q:"Do I get code and versions?", a:"Yes. Code in Git; deploy triggered via Cloudflare build hook. You can track and roll back versions." },
+  {
+    q: "What exactly do I get within 72 hours?",
+    a: "A clean, fast landing site with: professional contact form, SEO basics, and premium hosting on Cloudflare Pages. Plus/Pro plans add Calendar and/or Zoom integrations."
+  },
+  {
+    q: "Is hosting included?",
+    a: "Yes—your site is deployed to Cloudflare Pages as part of the setup. Domain registration and any third-party services are billed separately."
+  },
+  {
+    q: "How do you handle spam without exposing an email address?",
+    a: "Messages are submitted server-side (no public email) and protected with anti-spam (e.g., Cloudflare Turnstile)."
+  },
+  {
+    q: "Can I upgrade later?",
+    a: "Absolutely. You can move from Basic to Plus or Pro anytime—we enable the extras and redeploy."
+  },
+  {
+    q: "What if my content isn’t ready?",
+    a: "We can publish with tasteful placeholders and swap in your final copy and images later."
+  },
+  {
+    q: "Do I get access to the code and versions?",
+    a: "Yes. The project lives in a Git repo and deployments are triggered via a build hook. You can audit changes and roll back if needed."
+  },
 ];
+
 const faqSchema = {
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity": faqs.map(f => ({
-    "@type":"Question",
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
     "name": f.q,
-    "acceptedAnswer": { "@type":"Answer", "text": f.a }
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
   }))
 };
 ---
 <section id="faq" class="section">
   <div class="container">
-    <header class="head">
+    <header style="margin-bottom:18px">
       <h2>FAQ</h2>
-      <p class="lede">Short and clear — common questions answered.</p>
+      <p class="lede">Quick answers to common questions.</p>
     </header>
 
-    <div class="grid">
-      {faqs.map(item => (
-        <details class="faq">
-          <summary><span>{item.q}</span></summary>
+    <div class="faq-grid faq">
+      {faqs.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
           <div class="answer">{item.a}</div>
         </details>
       ))}
     </div>
   </div>
 
-  <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
 </section>
-
-<style>
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (max-width:900px){.grid{grid-template-columns:1fr}}
-.faq{background:#fff;border:1px solid var(--border);border-radius:14px;padding:0;box-shadow:0 12px 26px rgba(16,24,40,.08);overflow:hidden}
-.faq summary{cursor:pointer;list-style:none;padding:16px 18px;display:flex;align-items:center;font-weight:700;color:var(--ink)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary span{flex:1}
-.faq[open] summary{border-bottom:1px solid var(--border)}
-.answer{padding:14px 18px;color:var(--ink)}
-</style>
