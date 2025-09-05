@@ -1,34 +1,15 @@
 ---
-import { FEATURES } from "../../swiftsite.config";
-const links = [
+const nav = [
   { href: "/", label: "Home" },
   { href: "/#pricing", label: "Pricing" },
   { href: "/#contact", label: "Contact" },
 ];
 ---
-<header class="site-header" role="banner">
-  <div class="container bar">
-    <nav class="nav" aria-label="Primary">
-      <ul class="menu">
-        {links.map(l => <li><a href={l.href}>{l.label}</a></li>)}
-      </ul>
-      {FEATURES.contact && <a class="btn primary" href="#contact">Get in touch</a>}
+<header class="site-header">
+  <div class="container navbar">
+    <nav class="nav-links">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
     </nav>
+    <a href="/#contact" class="btn btn-outline cta">Get in touch</a>
   </div>
 </header>
-
-<style>
-.site-header{
-  position:sticky;top:0;z-index:50;background:var(--dark);
-  border-bottom:1px solid rgba(255,255,255,.06)
-}
-.bar{padding:14px 32px}
-.nav{display:flex;align-items:center;justify-content:space-between}
-.menu{display:flex;gap:18px;margin:0;padding:0;list-style:none}
-.menu a{
-  color:#E6EAF0;text-decoration:none;font-weight:700;padding:8px 6px
-}
-.menu a:hover{color:var(--champagne)}
-.btn.primary{color:#111}
-@media (max-width:720px){ .btn.primary{display:none} }
-</style>
