@@ -5,49 +5,27 @@ const plans = [
     name: "Basic",
     price: "€99 setup",
     highlight: false,
-    features: {
-      landing: true,
-      contact: true,
-      seo: true,
-      hosting: true,
-      calendar: false,
-      zoom: false,
-      priority: false,
-    },
-    cta: { label: "Choose Basic", href: "#contact" }
+    badge: null,
+    cta: { label: "Choose Basic", href: "#contact" },
+    features: { landing:true, contact:true, seo:true, hosting:true, calendar:false, zoom:false, priority:false }
   },
   {
     key: "plus",
     name: "Plus",
     price: "€149 setup",
-    highlight: true, // Most popular
-    features: {
-      landing: true,
-      contact: true,
-      seo: true,
-      hosting: true,
-      calendar: true, // OR Zoom (see footnote)
-      zoom: true,     // OR Calendar (see footnote)
-      priority: false,
-    },
+    highlight: true,
     badge: "Most popular",
-    cta: { label: "Choose Plus", href: "#contact" }
+    cta: { label: "Choose Plus", href: "#contact" },
+    features: { landing:true, contact:true, seo:true, hosting:true, calendar:true, zoom:true, priority:false } // OR logic in footnote
   },
   {
     key: "pro",
     name: "Pro",
     price: "€199 setup",
     highlight: false,
-    features: {
-      landing: true,
-      contact: true,
-      seo: true,
-      hosting: true,
-      calendar: true,
-      zoom: true,
-      priority: true,
-    },
-    cta: { label: "Choose Pro", href: "#contact" }
+    badge: null,
+    cta: { label: "Choose Pro", href: "#contact" },
+    features: { landing:true, contact:true, seo:true, hosting:true, calendar:true, zoom:true, priority:true }
   },
 ];
 
@@ -68,7 +46,6 @@ const rows = [
       <p class="lede">Pick what you need. Upgrade anytime.</p>
     </header>
 
-    <!-- DESKTOP table -->
     <div class="table-wrap" role="region" aria-labelledby="pricing-table">
       <table class="pricing-table" id="pricing-table" aria-describedby="pricing-footnote">
         <colgroup>
@@ -78,17 +55,28 @@ const rows = [
           <col class="c-plan"/>
         </colgroup>
 
+        <!-- Row 0: badges iznad naziva -->
         <thead>
+          <tr class="badges">
+            <th></th>
+            {plans.map(p => (
+              <th>
+                {p.badge && <span class="badge">{p.badge}</span>}
+              </th>
+            ))}
+          </tr>
+
+          <!-- Row 1: imena + cijena u JEDNOJ liniji -->
           <tr>
             <th class="feat-col" scope="col">What’s included</th>
             {plans.map((p) => (
               <th scope="col" class={`plan-col ${p.highlight ? "highlight" : ""}`}>
-                <div class="plan-head">
-                  {p.badge && <span class="badge">{p.badge}</span>}
-                  <div class="plan-name">{p.name}</div>
-                  <div class="plan-price">{p.price}</div>
-                  <a class={`btn choose ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a>
+                <div class="plan-top">
+                  <span class="plan-name">{p.name}</span>
+                  <span class="plan-sep">•</span>
+                  <span class="plan-price">{p.price}</span>
                 </div>
+                <a class={`btn choose ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a>
               </th>
             ))}
           </tr>
@@ -112,10 +100,6 @@ const rows = [
         </tbody>
 
         <tfoot>
-          <tr>
-            <th scope="row" class="feat-label">Setup price</th>
-            {plans.map((p) => <td class="price">{p.price}</td>)}
-          </tr>
           <tr class="cta-row">
             <th scope="row" class="feat-label">Get started</th>
             {plans.map((p) => (
@@ -131,7 +115,7 @@ const rows = [
       </p>
     </div>
 
-    <!-- MOBILE cards -->
+    <!-- Mobile cards (ne diramo: već su uredne) -->
     <div class="cards" aria-label="Pricing cards (mobile)">
       {plans.map((p) => (
         <article class={`card ${p.highlight ? "highlight" : ""}`}>
@@ -158,7 +142,6 @@ const rows = [
 .head h2 { font-size: clamp(26px, 3.2vw, 34px); margin: 0 0 6px; }
 .lede { color: var(--muted); margin: 0; }
 
-/* Table */
 .table-wrap { overflow-x: auto; }
 .pricing-table {
   width: 100%;
@@ -173,37 +156,38 @@ const rows = [
 .c-feat { width: 40%; min-width: 260px; }
 .c-plan { width: 20%; min-width: 180px; }
 
+/* badges red */
+.badges th { height: 32px; padding: 8px 16px 0; text-align:left; }
+.badge {
+  display:inline-block; font-size:12px; font-weight:700; line-height:1;
+  color: var(--accent); background: #fff3f3; border: 1px solid #ffd5d5;
+  padding: 5px 8px; border-radius: 999px;
+}
+
 .pricing-table thead th {
   text-align: left;
-  padding: 16px;
+  padding: 12px 16px 16px;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
+
+.plan-col .plan-top{
+  display:flex; align-items:baseline; gap:8px;
+  font-weight:700;
+}
+.plan-name{font-weight:700}
+.plan-sep{color:var(--muted)}
+.plan-price{color:var(--muted);font-weight:700}
+
+.btn.choose { display:inline-block; margin-top:8px; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:#fff; font-weight:600; }
+.btn.choose.primary { background: var(--accent); border-color: color-mix(in oklab, var(--accent) 80%, black); color: #fff; box-shadow: 0 8px 18px rgba(177,28,28,.18); }
+.btn.choose.wide { width: 100%; text-align:center; }
+
 .pricing-table tbody td, .pricing-table tbody th {
   padding: 14px 16px;
   border-bottom: 1px solid var(--border);
 }
-.pricing-table tfoot td, .pricing-table tfoot th {
-  padding: 14px 16px;
-  border-top: 1px solid var(--border);
-}
-
 .zebra td, .zebra th { background: color-mix(in oklab, var(--panel) 55%, transparent); }
-
-.plan-head { display: grid; gap: 6px; align-content: start; }
-.plan-name { font-weight: 700; }
-.plan-price { color: var(--muted); font-weight: 600; }
-.badge {
-  align-self: start; display: inline-block; font-size: 12px; font-weight: 700;
-  color: var(--ink); background: var(--panel); border: 1px solid var(--border);
-  padding: 4px 8px; border-radius: 999px;
-}
-.plan-col.highlight .badge { background: #fff3f3; border-color: #ffd5d5; color: var(--accent); }
-.plan-col.highlight .plan-name { color: var(--accent); }
-
-.btn.choose { display:inline-block; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:#fff; font-weight:600; }
-.btn.choose.primary { background: var(--accent); border-color: color-mix(in oklab, var(--accent) 80%, black); color: #fff; box-shadow: 0 8px 18px rgba(177,28,28,.18); }
-.btn.choose.wide { width: 100%; text-align:center; }
 
 .feat-label { font-weight: 600; color: var(--ink); }
 .tick { text-align: center; }
@@ -214,7 +198,6 @@ const rows = [
 .tick .yes { color: var(--accent); background: #fff4f4; border: 1px solid #ffd6d6; }
 .tick .no  { color: var(--muted); }
 
-.price { font-weight: 700; }
 .cta-row td { background: color-mix(in oklab, var(--panel) 60%, transparent); }
 
 .footnote { font-size: 13px; color: var(--muted); margin: 10px 4px 0; }
@@ -227,7 +210,7 @@ const rows = [
   padding: 18px; display: grid; gap: 10px;
 }
 .card.highlight { border-color: #ffd5d5; box-shadow: 0 14px 30px rgba(177,28,28,.12); }
-.card .badge { justify-self: start; background: #fff3f3; border-color: #ffd5d5; color: var(--accent); }
+.card .badge { justify-self: start; }
 .card h3 { margin: 0; font-size: 20px; }
 .card .price { color: var(--muted); font-weight: 700; }
 .card .list { list-style: none; padding: 0; margin: 4px 0 8px; display: grid; gap: 6px; }
@@ -235,7 +218,6 @@ const rows = [
 .card .list li.yes { color: var(--ink); }
 .card .list li.no { color: var(--muted); }
 
-/* Responsive switch */
 @media (max-width: 900px) {
   .pricing-table { display: none; }
   .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
