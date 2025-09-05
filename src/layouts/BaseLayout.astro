@@ -1,75 +1,28 @@
 ---
-const title = "SwiftSite — Launch your site in 72h";
-const desc =
-  "Streamlined web development. Premium craft, zero hassle. Your vision, live in 72 hours.";
+/* GLOBAL STYLES: obavezno ovako uvesti, bez <link> */
+import "../styles/global.css";
+
+/* SEO meta opcionalno */
+const { title = "SwiftSite — Launch in 72h", description = "Streamlined web development. Premium craft, zero hassle." } = Astro.props;
 ---
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>{title}</title>
-    <meta name="description" content={desc} />
+    <meta name="description" content={description} />
 
-    <!-- Fonts (from your snippet) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Favor icons (opciono) -->
+    <link rel="icon" href="/favicon.ico" />
 
-    <style>
-      :root{
-        --champagne:#D4C9A8;
-        --champagne-2:#E7E0D2;
-        --dark:#0A192F; /* dark blue */
-        --ink:#1d1f24;
-        --muted:#606973;
-        --bg:#F7F7F7;
-        --card:#fff;
-        --border:#ececec;
-      }
-      *{box-sizing:border-box}
-      html,body{height:100%}
-      body{
-        margin:0;background:var(--bg);color:var(--ink);
-        font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-        line-height:1.6;
-      }
-      .container{max-width:1200px;margin:0 auto;padding:0 32px}
-      .section{padding:96px 0}
-      .btn{
-        display:inline-block;border:0;border-radius:12px;cursor:pointer;
-        font-weight:800;text-decoration:none;padding:12px 18px
-      }
-      .btn.primary{
-        background:linear-gradient(180deg,#E4D5B5 0%, var(--champagne) 55%, #B5915E 100%);
-        color:#121212; box-shadow:0 10px 26px rgba(176,125,66,.28)
-      }
-      .btn.primary:hover{filter:brightness(.97)}
-      .btn.ghost{background:transparent;color:var(--ink);font-weight:800}
-      .btn.ghost:hover{text-decoration:underline}
-
-      /* cards */
-      .card{
-        background:var(--card);border:1px solid var(--border);border-radius:18px;
-        box-shadow:0 14px 32px rgba(16,24,40,.08)
-      }
-
-      /* heading helpers */
-      .h2{
-        font-family:"Playfair Display",serif;
-        font-weight:900;letter-spacing:-.01em;
-        font-size:clamp(28px,3.6vw,40px);margin:0 0 6px
-      }
-      .lede{color:var(--muted);margin:0}
-
-      /* smooth anchors */
-      html{scroll-behavior:smooth}
-    </style>
+    <!-- NIKAKVI stari CSS linkovi niti pozadinski SVG-ovi ovdje -->
   </head>
   <body>
+    <!-- Header/slot/Footer render ide iz pages -->
     <slot />
+
+    <!-- Nema skrivenih SVG-ova, pseudo-elemenata, niti background image-ova u layoutu -->
   </body>
 </html>
