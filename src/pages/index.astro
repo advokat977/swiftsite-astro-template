@@ -4,20 +4,27 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
 import PricingTable from "../components/PricingTable.astro";
-import Process from "../components/Process.astro";
+import FAQ from "../components/FAQ.astro";
 import Contact from "../components/Contact.astro";
-import FinalCTA from "../components/FinalCTA.astro";
-import { FEATURES } from "../../swiftsite.config";
+import CtaStrip from "../components/CtaStrip.astro";
 ---
 <Base>
   <Header />
 
   <main>
     <Hero />
-    {FEATURES.pricing && <PricingTable />}
-    <Process />
-    {FEATURES.contact && <Contact />}
-    <FinalCTA />
+
+    <section class="section">
+      <div class="container">
+        <!-- spacer wrapper just to keep consistent rhythm -->
+      </div>
+    </section>
+
+    <PricingTable />
+    <FAQ />
+    <Contact />
+
+    <CtaStrip />
   </main>
 
   <Footer />
