@@ -6,29 +6,29 @@ const links = [
   { href: "/#contact", label: "Contact" },
 ];
 ---
-<header class="site-header">
-  <div class="wrap">
+<header class="site-header" role="banner">
+  <div class="container bar">
     <nav class="nav" aria-label="Primary">
       <ul class="menu">
         {links.map(l => <li><a href={l.href}>{l.label}</a></li>)}
       </ul>
-      {FEATURES.contact && <a class="cta" href="#contact">Get in touch</a>}
+      {FEATURES.contact && <a class="btn primary" href="#contact">Get in touch</a>}
     </nav>
   </div>
 </header>
 
 <style>
-.site-header{position:sticky;top:0;z-index:40;background:#ffffffeb;backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #ececec}
-.wrap{max-width:1120px;margin:0 auto;padding:10px 18px}
+.site-header{
+  position:sticky;top:0;z-index:50;background:var(--dark);
+  border-bottom:1px solid rgba(255,255,255,.06)
+}
+.bar{padding:14px 32px}
 .nav{display:flex;align-items:center;justify-content:space-between}
 .menu{display:flex;gap:18px;margin:0;padding:0;list-style:none}
-.menu a{display:inline-block;padding:8px 10px;color:#1d1f24;font-weight:600;text-decoration:none}
-.menu a:hover{color:#a06a2d}
-.cta{
-  background:linear-gradient(180deg,#d9b07a 0%,#b3864f 100%);
-  color:#fff;font-weight:700;padding:10px 16px;border-radius:12px;text-decoration:none;
-  box-shadow:0 6px 18px rgba(176,125,66,.28);
+.menu a{
+  color:#E6EAF0;text-decoration:none;font-weight:700;padding:8px 6px
 }
-.cta:hover{filter:brightness(.96)}
-@media (max-width:720px){ .menu{gap:12px} .cta{display:none} }
+.menu a:hover{color:var(--champagne)}
+.btn.primary{color:#111}
+@media (max-width:720px){ .btn.primary{display:none} }
 </style>
