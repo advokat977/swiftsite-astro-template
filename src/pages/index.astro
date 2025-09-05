@@ -12,18 +12,16 @@ import { FEATURES } from "../../swiftsite.config";
 <Base>
   <Header />
 
-  <main class="container">
+  <main>
     {FEATURES.hero && <Hero />}
-    <hr class="sep" />
     {FEATURES.pricing && <Pricing />}
-    {FEATURES.calendar && <div style="margin-top:18px"><CalendarBlock /></div>}
-    {FEATURES.zoom && <div style="margin-top:18px"><ZoomBlock /></div>}
-    {FEATURES.contact && <div style="margin-top:18px"><Contact /></div>}
+
+    <div class="container mt-24">
+      {FEATURES.calendar && <div class="panel"><CalendarBlock /></div>}
+      {FEATURES.zoom && <div class="panel mt-24"><ZoomBlock /></div>}
+      {FEATURES.contact && <div class="mt-24"><Contact /></div>}
+    </div>
   </main>
 
   <Footer />
-
-  <style>
-    .sep{border:0;border-top:1px solid var(--border);margin:22px 0}
-  </style>
 </Base>
