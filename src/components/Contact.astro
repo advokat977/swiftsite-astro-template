@@ -1,46 +1,55 @@
 ---
 ---
-<section id="contact" class="section light">
-  <div class="container">
-    <header style="margin-bottom:12px">
-      <h2>Contact us</h2>
-      <p class="muted">Tell us about your site and which plan you want.</p>
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <header class="head">
+      <h2 id="contact-title">Contact us</h2>
+      <p class="lede">Tell us about your site and which plan you want.</p>
     </header>
 
-    <form class="panel form" method="post" action="/api/contact">
+    <form class="form" method="post" action="#" onsubmit="return false">
       <div class="row">
         <label class="field">
           <span>Name</span>
-          <input type="text" name="name" placeholder="Your name" required>
+          <input name="name" type="text" placeholder="Your name" required>
         </label>
         <label class="field">
           <span>Email</span>
-          <input type="email" name="email" placeholder="you@email.com" required>
+          <input name="email" type="email" placeholder="you@email.com" required>
         </label>
       </div>
 
       <label class="field">
         <span>Message</span>
-        <textarea name="message" rows="7" placeholder="What do you need?" required></textarea>
+        <textarea name="message" rows="6" placeholder="What do you need?" required></textarea>
       </label>
 
-      <div class="actions">
-        <button class="btn gold" type="submit">Send message</button>
-      </div>
+      <button class="btn" type="submit">Send message</button>
+      <p class="hint">No public email. Messages are processed server-side to avoid spam.</p>
     </form>
   </div>
 </section>
 
 <style>
-.form{padding:18px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
-@media (max-width:900px){.row{grid-template-columns:1fr}}
-.field{display:flex;flex-direction:column;gap:6px}
-.field span{font-weight:700;color:#e6e9ef}
-.light .field span{color:#1b1f27}
-input,textarea{
-  width:100%;border:1px solid #e4e7ee;border-radius:12px;padding:12px 14px;font:inherit;color:#111827;background:#fff;
+.contact{padding:56px 0;background:#fff}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+.head{margin-bottom:12px}
+.head h2{margin:0 0 6px;font-size:clamp(26px,3.2vw,34px);font-weight:900}
+.lede{margin:0;color:#606973}
+.form{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;box-shadow:0 14px 32px rgba(16,24,40,.06)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){ .row{grid-template-columns:1fr} }
+.field{display:flex;flex-direction:column;gap:8px;margin:10px 0 0}
+.field span{font-weight:700;color:#2a2f36}
+input, textarea{
+  appearance:none;width:100%;border:1px solid #e5e7eb;border-radius:12px;padding:12px 12px;font:inherit;color:#111;
+  background:#fff;outline:none;transition:border-color .15s ease
 }
-textarea{resize:vertical}
-.actions{display:flex;justify-content:flex-start;margin-top:10px}
+input:focus, textarea:focus{border-color:#caa26d;box-shadow:0 0 0 3px rgba(202,162,109,.2)}
+.btn{
+  margin-top:12px;background:linear-gradient(180deg,#d9b07a 0%,#b3864f 100%);color:#fff;font-weight:900;
+  padding:12px 18px;border-radius:14px;border:0;cursor:pointer;box-shadow:0 10px 24px rgba(176,125,66,.26)
+}
+.btn:hover{filter:brightness(.96)}
+.hint{margin:8px 0 0;color:#6b737d;font-size:13px}
 </style>
