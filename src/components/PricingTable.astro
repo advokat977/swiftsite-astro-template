@@ -1,112 +1,106 @@
 ---
-const plans = [
+const cards = [
   {
     id: "basic",
     name: "Basic",
-    tagline: "Essential Start",
-    price: "€99 setup",
-    features: [
-      "Custom landing page",
-      "Contact form (email)",
-      "Responsive design",
-      "Premium hosting",
-      "SEO basics",
-    ],
-    cta: "Choose Basic",
+    blurb: "Ideal for a quick and effective online debut.",
     popular: false,
+    features: [
+      "Custom Landing Page",
+      "Professional Contact Form",
+      "SEO Optimisation Basics",
+      "Premium Hosting",
+    ],
+    cta: "Choose Plan",
   },
   {
     id: "plus",
     name: "Plus",
-    tagline: "Dynamic Engagement",
-    price: "€149 setup",
+    blurb: "Most popular. Built for dynamic client engagement.",
+    popular: true,
     features: [
       "Everything in Basic",
-      "Calendar / Booking integration",
-      "Zoom / Online meeting integration",
-      "Enhanced analytics",
+      "Calendar or Zoom Integration",
+      "Enhanced Analytics",
+      "Premium Hosting",
     ],
-    cta: "Choose Plus",
-    popular: true,
+    cta: "Choose Plan",
   },
   {
     id: "pro",
     name: "Pro",
-    tagline: "Full Spectrum",
-    price: "€199 setup",
+    blurb: "Full-spectrum solution for growing teams.",
+    popular: false,
     features: [
       "Everything in Plus",
-      "Multi-page site (up to 5)",
-      "Custom functionality (on request)",
-      "Priority support",
+      "Full Multi-Page Website",
+      "Custom Functionality (on request)",
+      "Premium Hosting",
     ],
-    cta: "Choose Pro",
-    popular: false,
+    cta: "Choose Plan",
   },
 ];
 ---
-<section id="pricing" class="pricing" aria-labelledby="pricing-title">
-  <div class="wrap">
+<section id="pricing" class="section pricing" aria-labelledby="pricing-title">
+  <div class="container">
     <header class="head">
-      <h2 id="pricing-title">Plans built for speed — and polish</h2>
-      <p class="lede">Pick what you need. Upgrade anytime. No hidden fees.</p>
+      <h2 id="pricing-title" class="h2">Tailored Solutions. Unrivalled Speed.</h2>
+      <p class="lede">Every package is designed to deliver a fast, effective online presence. Premium hosting included.</p>
     </header>
 
-    <div class="grid">
-      {plans.map((p) => (
-        <article class={`card ${p.popular ? "popular" : ""}`} aria-labelledby={`plan-${p.id}`}>
-          {p.popular && <div class="ribbon" aria-hidden="true">Most popular</div>}
-          <h3 id={`plan-${p.id}`} class="plan-name">
-            <span class="kicker">{p.name}</span> {p.tagline && <span class="sub">— {p.tagline}</span>}
-          </h3>
-          <div class="price">{p.price}</div>
+    <div class="cards">
+      {cards.map(c => (
+        <article class={`card pcard ${c.popular ? "is-popular" : ""}`}>
+          {c.popular && <div class="flag" aria-hidden="true">Most popular</div>}
+          <h3 class="title">{c.name}</h3>
+          <p class="blurb">{c.blurb}</p>
           <ul class="list">
-            {p.features.map(f => <li>{f}</li>)}
+            {c.features.map(f => (
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.17 4.83 12l-1.42 1.41L9 19l12-12-1.41-1.41z"/></svg>
+                <span>{f}</span>
+              </li>
+            ))}
           </ul>
-          <a class="btn" href={`#contact`} data-plan={p.id}>{p.cta}</a>
+          <a href="#contact" class="btn primary">{c.cta}</a>
         </article>
       ))}
     </div>
 
-    <p class="footnote">
-      <strong>Plus</strong> includes <em>Calendar OR Zoom</em> (one add-on). <strong>Pro</strong> includes both.
-    </p>
+    <p class="foot">Plus includes <em>Calendar OR Zoom</em>. Pro includes both.</p>
   </div>
 </section>
 
 <style>
-.pricing{padding:56px 0;background:#faf9f7}
-.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
-.head{text-align:center;margin-bottom:22px}
-.head h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 6px;font-weight:900;letter-spacing:-.01em}
-.head .lede{color:#606973;margin:0}
-.grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch
+.pricing{background:var(--bg)}
+.head{text-align:center;margin-bottom:28px}
+.cards{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px
 }
-@media (max-width:900px){ .grid{grid-template-columns:1fr;gap:14px} }
-.card{
-  background:#fff;border:1px solid #eee;border-radius:18px;padding:20px 18px 18px;
-  box-shadow:0 14px 32px rgba(16,24,40,.08);position:relative;display:flex;flex-direction:column
+@media (max-width:980px){ .cards{grid-template-columns:1fr} }
+
+.pcard{
+  padding:28px;border-radius:16px;transition:transform .25s ease, box-shadow .25s ease;
+  text-align:left
 }
-.card.popular{border-color:#e7d2b3;box-shadow:0 20px 40px rgba(176,125,66,.18)}
-.ribbon{
-  position:absolute;top:12px;right:12px;background:#f3e4cf;color:#8b612c;font-weight:800;
-  font-size:12px;padding:6px 8px;border-radius:999px
+.pcard:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,.12)}
+.pcard .title{
+  font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(20px,2.2vw,24px);margin:0 0 6px
 }
-.plan-name{margin:0 0 2px;font-size:20px}
-.kicker{font-weight:900}
-.sub{color:#7a838f;font-weight:600}
-.price{margin:2px 0 10px;font-weight:900;color:#1d1f24}
-.list{margin:0 0 16px;padding:0;list-style:none;flex:1}
-.list li{
-  display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed #eee;color:#2a2f36
+.pcard .blurb{margin:0 0 18px;color:var(--muted)}
+.pcard .list{list-style:none;margin:0 0 22px;padding:0}
+.pcard .list li{display:flex;gap:10px;align-items:center;margin:10px 0;color:#2a2f36}
+.pcard .list svg{color:var(--champagne)}
+
+.is-popular{
+  background:var(--dark);color:#E9ECF2;border-color:transparent;transform:scale(1.02)
 }
-.list li::before{content:"✓";color:#b07a3a;font-weight:900}
-.btn{
-  align-self:flex-start;text-decoration:none;font-weight:800;color:#fff;
-  background:linear-gradient(180deg,#d9b07a 0%,#b3864f 100%);padding:10px 14px;border-radius:12px;
-  box-shadow:0 8px 22px rgba(176,125,66,.26)
+.is-popular .title{color:var(--champagne)}
+.is-popular .blurb{color:#DADFE7}
+.is-popular .list li{color:#F3F6FB}
+.flag{
+  position:absolute;top:14px;right:14px;background:#f0e6d4;color:#8b612c;font-weight:900;
+  padding:6px 10px;border-radius:999px;font-size:12px
 }
-.btn:hover{filter:brightness(.96)}
-.footnote{margin:16px 0 0;color:#6b737d;text-align:center}
+.foot{text-align:center;color:var(--muted);margin:16px 0 0}
 </style>
