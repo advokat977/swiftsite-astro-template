@@ -1,0 +1,14 @@
+---
+import { SITE } from "../../swiftsite.config";
+const year = new Date().getFullYear();
+---
+<footer class="container footer">
+  © {year} {SITE.title}
+</footer>
+
+<style>
+.footer{
+  border-top:1px solid var(--border);
+  text-align:center;padding:14px;color:var(--muted)
+}
+</style>
