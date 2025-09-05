@@ -1,70 +1,107 @@
-// Osnovni podaci o sajtu
+// ---------------------------------------------
+// SwiftSite – Site Config (current live design)
+// ---------------------------------------------
+
+// Basic site info
 export const SITE = {
   title: "SwiftSite",
-  tagline: "Launch in 72h — Astro + Cloudflare",
+  tagline: "Your vision, live in 72 hours.",
   description:
-    "Ultra-brzi sajtovi sa minimalnom konfiguracijom. Landing + mail + calendar + Zoom. Lansiranje u roku od 72h.",
+    "Streamlined web development with uncompromised quality. Landing + mail + calendar or Zoom. Launch in 72 hours on Cloudflare hosting.",
   lang: "en",
   author: "SwiftSite",
-  url: "https://example.com" // postavi kad dodaš domen
+  url: "https://example.com", // set when domain is connected
 };
 
-// Tema (LIGHT default)
+// Theme (single light theme; dark mode removed)
 export const THEME = {
-  bg: "#ffffff",
-  panel: "#f8f9fb",
-  ink: "#111111",
-  muted: "#666a73",
-  accent: "#b11c1c"
+  // Premium light palette (champagne & navy)
+  bg: "#F7F7F7",          // page background
+  panel: "#FFFFFF",       // cards / panels
+  ink: "#0E1420",         // primary text
+  muted: "#6B7280",       // secondary text
+  accent: "#B99B6B",      // champagne / gold accent
+  accentDeep: "#0A192F",  // deep navy for contrasts if needed
+  radius: 14,             // default border radius for cards
 };
 
-// Linkovi za akcije (postavi prave adrese po potrebi)
+// Anchor links / CTAs used in components
 export const LINKS = {
-  email: "mailto:hello@example.com",
-  calendar: "#",
-  zoom: "#"
+  contact: "#contact",
+  pricing: "#pricing",
+  // leave these as external service links if you ever enable them
+  calendar: "#", // e.g. Cal.com link
+  zoom: "#",     // e.g. Zoom room link
 };
 
-// Uključene funkcionalnosti
+// Feature toggles (only what we actually render)
 export const FEATURES = {
   hero: true,
   pricing: true,
+  faq: true,
   contact: true,
+
+  // currently unused, kept for template parity
   calendar: false,
   zoom: false,
   gallery: false,
-  blog: false
+  blog: false,
+
+  // explicit: no dark mode / auto-switch
+  darkMode: false,
 };
 
-// Paketi
+// Pricing (copy aligned with current English site)
 export const PACKAGES = [
   {
     slug: "basic",
     name: "Basic",
     price: "€99 setup",
-    desc: "Landing + contact email",
-    features: ["Landing page", "Contact form (email)", "SEO basics", "Fast hosting"]
+    desc: "Ideal for a quick and effective online debut.",
+    features: [
+      "Custom Landing Page",
+      "Professional Contact Form",
+      "SEO Optimisation Basics",
+      "Cloudflare hosting",
+    ],
   },
   {
     slug: "plus",
     name: "Plus",
     price: "€149 setup",
-    desc: "Basic + 1 dodatni servis",
-    features: ["Sve iz Basic", "Calendar OR Zoom integracija"]
+    desc: "Most popular. Built for dynamic client engagement.",
+    features: [
+      "Everything in Basic",
+      "Calendar OR Zoom integration",
+      "Advanced analytics",
+      "Cloudflare hosting",
+    ],
+    mostPopular: true,
   },
   {
     slug: "pro",
     name: "Pro",
     price: "€199 setup",
-    desc: "Basic + 2 dodatna servisa",
-    features: ["Sve iz Basic", "Calendar AND Zoom integracija"]
-  }
+    desc: "Full-spectrum solution for growing teams.",
+    features: [
+      "Everything in Plus",
+      "Full multi-page website",
+      "Custom functionality (on request)",
+      "Cloudflare hosting",
+    ],
+  },
 ];
 
-// Brend asseti (iz /public)
+// Pricing table helper (footnote under table)
+export const PRICING_META = {
+  footnote:
+    "Plus includes Calendar OR Zoom (one add-on). Pro includes both. No hidden fees. Upgrade anytime.",
+};
+
+// Brand assets (served from /public)
 export const ASSETS = {
   logoLight: "/brand/swiftsite-logo.png",
   logoDark: "/brand/swiftsite-logo.png",
   og: "/brand/swiftsite-logo.png",
-  favicon: "/favicon.svg"
+  favicon: "/favicon.svg",
 };
