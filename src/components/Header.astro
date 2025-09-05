@@ -5,19 +5,16 @@
     <nav class="nav">
       <a href="/" class="nav-link">Home</a>
       <a href="#pricing" class="nav-link">Pricing</a>
-      <a href="/thanks" class="nav-link">Thanks</a>
       <a href="#contact" class="btn primary">Get in touch</a>
     </nav>
   </div>
 </header>
 
 <style>
-.site-header{ position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1px solid var(--border); }
-.bar{ display:flex; align-items:center; height: 64px; }
-.nav{ display:flex; align-items:center; gap: 14px; margin-left:auto; }
-.nav-link{ padding: 8px 10px; color: var(--muted); font-weight: 600; }
-.nav-link:hover{ color: var(--ink); }
-@media (max-width: 720px){
-  .nav-link:nth-child(2){ display:none; } /* skrivamo Pricing link na malom ekranu */
-}
+.site-header{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;height:64px}
+.nav{display:flex;align-items:center;gap:14px;margin-left:auto}
+.nav-link{padding:8px 10px;color:var(--muted);font-weight:600}
+.nav-link:hover{color:var(--ink)}
+@media (max-width:720px){ .nav-link:nth-child(2){display:none} }
 </style>
