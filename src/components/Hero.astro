@@ -1,49 +1,19 @@
----
----
-<section id="hero" class="hero" aria-labelledby="hero-title">
-  <div class="bg">
-    <!-- champagne diagonal “lines” wash -->
-    <div class="lines"></div>
-    <div class="overlay"></div>
-  </div>
-
-  <div class="container inner">
-    <div class="content">
-      <h1 id="hero-title" class="title">
-        <span>Your Vision,</span> <em>Live in 72 Hours.</em>
+<section class="hero">
+  <div class="container wrap">
+    <div>
+      <h1>
+        Your Vision, <strong>Live in 72 hours.</strong>
       </h1>
       <p class="lede">Streamlined web development. Premium craft, zero hassle.</p>
-
       <div class="actions">
-        <a class="btn primary" href="#contact">Launch Your Project</a>
-        <a class="btn ghost" href="#pricing" aria-label="See pricing">See pricing →</a>
+        <a href="#contact" class="btn btn-primary">Launch your project</a>
+        <a href="#pricing" class="btn btn-outline">See pricing →</a>
       </div>
-
-      <ul class="bullets" role="list">
-        <li>⚡ Lighthouse 100/100</li>
-        <li>🛡️ Cloudflare hosting</li>
-        <li>🔧 Zero maintenance</li>
-      </ul>
+      <div class="badges" aria-label="highlights">
+        <span>⚡ Lighthouse 100/100</span>
+        <span>🛡️ Cloudflare hosting</span>
+        <span>🧰 Zero maintenance</span>
+      </div>
     </div>
   </div>
 </section>
-
-<style>
-.hero{position:relative;background:var(--dark);color:#E9ECF2}
-.bg{position:absolute;inset:0;overflow:hidden}
-.lines{
-  position:absolute;inset:-20%;
-  background:linear-gradient(135deg, rgba(212,201,168,.18) 0%, rgba(10,25,47,0) 48%, rgba(212,201,168,.18) 100%);
-  filter:blur(2px)
-}
-.overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%, rgba(10,25,47,.22) 65%, rgba(10,25,47,.45) 100%)}
-.inner{min-height:72vh;display:grid;place-items:center;padding:96px 32px}
-.content{max-width:800px;text-align:center}
-.title{
-  font-family:"Playfair Display",serif;font-weight:900;letter-spacing:-.01em;
-  font-size:clamp(36px,6.2vw,72px);line-height:1.12;margin:0 0 10px
-}
-.title em{color:var(--champagne);font-style:normal}
-.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:10px 0 14px}
-.bullets{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:6px 0 0;padding:0;list-style:none;color:#CBD5E1}
-</style>
