@@ -1,20 +1,20 @@
 ---
+const NAV = [
+  { href: "/", label: "Home" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#contact", label: "Get in touch" },
+];
 ---
-<header class="site-header">
-  <div class="container bar">
-    <nav class="nav">
-      <a href="/" class="nav-link">Home</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
-      <a href="#contact" class="btn primary">Get in touch</a>
+<header style="position:sticky;top:0;z-index:40;background:rgba(14,17,22,.82);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:64px;">
+    <!-- Minimal brand text (bez logotipa u headeru) -->
+    <a href="/" class="brand" style="font-weight:800;letter-spacing:.2px;color:var(--ink);text-decoration:none">SwiftSite</a>
+
+    <nav style="display:flex;gap:18px;align-items:center">
+      {NAV.map(item => (
+        <a href={item.href} class="link" style="opacity:.95">{item.label}</a>
+      ))}
+      <a href="/#contact" class="btn gold" style="height:38px">Get in touch</a>
     </nav>
   </div>
 </header>
-
-<style>
-.site-header{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--border)}
-.bar{display:flex;align-items:center;height:64px}
-.nav{display:flex;align-items:center;gap:14px;margin-left:auto}
-.nav-link{padding:8px 10px;color:var(--muted);font-weight:600}
-.nav-link:hover{color:var(--ink)}
-@media (max-width:720px){ .nav-link:nth-child(2){display:none} }
-</style>
