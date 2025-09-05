@@ -11,10 +11,14 @@ const links = [
 <header class="shell">
   <div class="container bar">
     <a class="brand" href="/" aria-label={SITE.title}>
-      <!-- Logo u maloj "piluloj" sa bijelom pozadinom da bude čitljiv i u dark modu -->
-      <span class="logo-card">
-        <img src={ASSETS.logoLight} alt="SwiftSite logo" width="132" height="28" loading="eager" />
-      </span>
+      <img
+        class="logo-img"
+        src={ASSETS.logoLight}
+        alt="SwiftSite"
+        width="240" height="52"
+        loading="eager"
+        decoding="async"
+      />
     </a>
 
     <nav class="nav">
@@ -35,7 +39,7 @@ const links = [
 </nav>
 
 <script>
-  // Mobile drawer
+  // Drawer
   const burger = document.querySelector(".burger");
   const drawer = document.querySelector(".drawer");
   burger?.addEventListener("click", () => {
@@ -51,10 +55,9 @@ const links = [
   function nextMode(mode){ return mode === "light" ? "dark" : mode === "dark" ? "system" : "light"; }
   function currentMode(){ return document.documentElement.getAttribute("data-theme-mode") || "system"; }
   function setMode(mode){
-    window.__setThemeMode?.(mode);
+    (window as any).__setThemeMode?.(mode);
     try { localStorage.setItem(KEY, mode) } catch(_) {}
-    btn && (btn.textContent = iconFor(mode));
-    btn && btn.setAttribute("title", `Theme: ${mode}`);
+    if(btn){ btn.textContent = iconFor(mode); btn.setAttribute("title", `Theme: ${mode}`); }
   }
   setMode(currentMode());
   btn?.addEventListener("click", () => setMode(nextMode(currentMode())));
@@ -68,13 +71,16 @@ const links = [
   border-bottom:1px solid var(--border);
 }
 .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-.brand{display:flex;align-items:center;gap:10px}
-.logo-card{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:6px 10px;border-radius:12px;background:#fff;border:1px solid var(--border);
-  box-shadow:0 2px 6px rgba(16,24,40,.06)
+.brand{display:flex;align-items:center}
+.logo-img{
+  height:32px; width:auto;
+  image-rendering:-webkit-optimize-contrast;
+  filter: drop-shadow(0 0 0 rgba(0,0,0,0)); /* sprječava blur u nekim browserima */
 }
-.logo-card img{display:block;height:28px;width:auto}
+:root[data-theme="dark"] .logo-img{
+  /* malo “svjetlosti” oko loga da ostane čitljiv u dark-u */
+  filter: drop-shadow(0 0 1px rgba(255,255,255,.25));
+}
 .nav{display:flex;gap:18px}
 .nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
 .nav a:hover{border-color:var(--ink)}
