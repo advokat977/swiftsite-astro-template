@@ -11,11 +11,11 @@ export const SITE = {
 
 // Tema (boje)
 export const THEME = {
-  bg: "#0d1117",
-  panel: "#0f1521",
-  ink: "#e6e9ef",
-  muted: "#aeb6c2",
-  accent: "#b11c1c",
+  bg: "#ffffff",
+  panel: "#f8f9fb",
+  ink: "#111111",
+  muted: "#555555",
+  accent: "#b11c1c"
 };
 
 // Linkovi za akcije (postavi kad imaš prave adrese)
