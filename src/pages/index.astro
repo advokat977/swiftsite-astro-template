@@ -1,23 +1,61 @@
 ---
 import Base from "../layouts/BaseLayout.astro";
----
-<Base title="SwiftSite Template — Astro + Cloudflare">
-  <header class="container" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid;border-color:#ffffff18">
-    <strong>SwiftSite</strong>
-    <nav style="display:flex;gap:16px">
-      <a href="/">Home</a>
-      <a href="/thanks">Thanks</a>
-    </nav>
-  </header>
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE, FEATURES } from "../../swiftsite.config";
+import { metaDefaults } from "../lib/seo";
 
-  <main class="container" style="padding:30px 20px">
-    <h1 style="font-size:40px;line-height:1.1;margin:0 0 10px">It works 🎉</h1>
-    <p style="color:var(--muted);max-width:720px">
-      Ovo je minimalni Astro + Cloudflare skeleton. U sljedećim fazama dodaćemo komponente (Contact form, Calendar, Zoom) i config za pakete.
-    </p>
+const meta = metaDefaults();
+---
+<Base title={meta.title} description={meta.description} ogImage={meta.og}>
+  <Header />
+
+  <main class="container">
+    <section class="hero">
+      <h1><span class="serif">It works</span> 🎉</h1>
+      <p class="lede">
+        {SITE.tagline}
+      </p>
+      <div class="actions">
+        {FEATURES.contactForm && <a class="btn primary" href="#contact">Contact</a>}
+        {FEATURES.calendar && <a class="btn ghost" href="#calendar">Calendar</a>}
+        {FEATURES.zoom && <a class="btn ghost" href="#zoom">Zoom</a>}
+      </div>
+    </section>
+
+    <hr class="sep" />
+
+    <section>
+      <h2>What’s inside this template</h2>
+      <ul class="list">
+        <li>Global layout, theme from config</li>
+        <li>Simple SEO helper (title/description/OG)</li>
+        <li>Feature toggles: mail / calendar / Zoom / blog / gallery</li>
+      </ul>
+    </section>
+
+    {FEATURES.contactForm && (
+      <section id="contact" class="panel">
+        <h3>Contact (placeholder)</h3>
+        <p>Ovdje će u Fazi 4 doći prava forma (Cloudflare Pages Function + email).</p>
+      </section>
+    )}
   </main>
 
-  <footer class="container" style="border-top:1px solid;border-color:#ffffff18;text-align:center;padding:16px;color:var(--muted)">
-    © <script>document.write(new Date().getFullYear())</script> SwiftSite
-  </footer>
+  <Footer />
+
+  <style>
+    .hero{padding:24px 0}
+    .hero h1{font-size:44px;line-height:1.1;margin:0 0 10px}
+    .hero .lede{color:var(--muted);font-size:18px;margin:0 0 18px;max-width:720px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none}
+    .btn.primary{background:var(--accent);color:white;border:1px solid #00000033}
+    .btn.ghost{border:1px solid #ffffff2a;color:var(--ink)}
+    .sep{border:0;border-top:1px solid var(--border);margin:22px 0}
+    .panel{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:12px}
+    .list{color:var(--muted)}
+    .serif{font-family: Georgia, 'Times New Roman', serif}
+    @media (max-width: 980px){ .hero h1{font-size:34px} }
+  </style>
 </Base>
