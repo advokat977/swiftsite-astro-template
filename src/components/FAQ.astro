@@ -1,0 +1,98 @@
+---
+const faqs = [
+  {
+    q: "Šta tačno dobijam u roku 72h?",
+    a: "Jednostavan, brz landing sa uključeno: kontakt forma (email), osnovni SEO, brzo hostovanje na Cloudflare Pages. Po želji uključujemo kalendar ili Zoom (Plus/Pro paketi)."
+  },
+  {
+    q: "Da li je hosting uključen u cijenu?",
+    a: "Da. Koristimo Cloudflare Pages (besplatno za ovaj tip sajtova). Nema skrivenih troškova. Domen, ako želiš prilagođeni, plaća se odvojeno kod registra (Cloudflare, Namecheap…)."
+  },
+  {
+    q: "Kako se rješava spam ako nema javne email adrese?",
+    a: "Kontakt forma šalje poruke serverless putem (bez izlaganja email adrese). Dodajemo i anti-spam zaštitu (Cloudflare Turnstile)."
+  },
+  {
+    q: "Mogu li kasnije nadograditi paket?",
+    a: "Naravno. Sa Basic na Plus ili Pro u bilo kom trenutku — samo uključimo dodatne komponente i objavimo novu verziju."
+  },
+  {
+    q: "Šta ako nemam sadržaj spreman?",
+    a: "Možemo postaviti placeholder tekst i slike, pa naknadno zamijeniti. Sajt ostaje brz i spreman dok ti finalizuješ sadržaj."
+  },
+  {
+    q: "Imam li pristup kodu i verzijama?",
+    a: "Da. Kod je u Git repozitorijumu; objava ide ručno preko Cloudflare build hooka. Možeš pratiti i vraćati verzije kad god treba."
+  },
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+};
+---
+<section id="faq" class="faq-section">
+  <div class="container">
+    <header class="head">
+      <h2>FAQ</h2>
+      <p class="lede">Kratko i jasno — najčešća pitanja i odgovori.</p>
+    </header>
+
+    <div class="grid">
+      {faqs.map((item) => (
+        <details class="faq">
+          <summary><span>{item.q}</span></summary>
+          <div class="answer">{item.a}</div>
+        </details>
+      ))}
+    </div>
+
+    <div class="cta-wrap">
+      <a class="btn primary" href="#contact">Još pitanja? Piši nam</a>
+    </div>
+  </div>
+
+  <!-- SEO: FAQ schema -->
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
+</section>
+
+<style>
+.faq-section{padding:56px 0}
+.head{margin-bottom:18px}
+.head h2{font-size:clamp(26px,3.2vw,34px);margin:0 0 6px}
+.lede{color:var(--muted);margin:0}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+@media (max-width: 900px){
+  .grid{grid-template-columns:1fr}
+}
+
+.faq{
+  background:#fff;border:1px solid var(--border);border-radius:14px;padding:0;
+  box-shadow:0 12px 26px rgba(16,24,40,.08);overflow:hidden
+}
+:root[data-theme="dark"] .faq{
+  background:#0f1521;box-shadow:0 12px 26px rgba(0,0,0,.35)
+}
+
+.faq summary{
+  cursor:pointer;list-style:none;padding:16px 18px;display:flex;align-items:center;
+  font-weight:700;color:var(--ink)
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary span{flex:1}
+.faq[open] summary{border-bottom:1px solid var(--border)}
+
+.answer{padding:14px 18px;color:var(--ink)}
+.cta-wrap{margin-top:16px}
+</style>
