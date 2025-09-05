@@ -1,49 +1,49 @@
 ---
 ---
-<section class="hero" aria-labelledby="hero-title">
+<section id="hero" class="hero" aria-labelledby="hero-title">
   <div class="bg">
-    <div class="vignette"></div>
-    <div class="gradient"></div>
+    <!-- champagne diagonal “lines” wash -->
+    <div class="lines"></div>
+    <div class="overlay"></div>
   </div>
 
-  <div class="wrap">
-    <h1 id="hero-title" class="title">
-      Your Vision, <span>Live in 72 Hours.</span>
-    </h1>
-    <p class="lede">
-      Streamlined web development. Premium craft, zero hassle.
-    </p>
+  <div class="container inner">
+    <div class="content">
+      <h1 id="hero-title" class="title">
+        <span>Your Vision,</span> <em>Live in 72 Hours.</em>
+      </h1>
+      <p class="lede">Streamlined web development. Premium craft, zero hassle.</p>
 
-    <div class="cta-row">
-      <a class="btn primary" href="#contact">Launch Your Project</a>
-      <a class="link" href="#pricing" aria-label="See pricing">See pricing →</a>
+      <div class="actions">
+        <a class="btn primary" href="#contact">Launch Your Project</a>
+        <a class="btn ghost" href="#pricing" aria-label="See pricing">See pricing →</a>
+      </div>
+
+      <ul class="bullets" role="list">
+        <li>⚡ Lighthouse 100/100</li>
+        <li>🛡️ Cloudflare hosting</li>
+        <li>🔧 Zero maintenance</li>
+      </ul>
     </div>
-
-    <ul class="badges" role="list">
-      <li>⚡ Lighthouse 100/100</li>
-      <li>🛡️ Cloudflare hosting</li>
-      <li>🔧 Zero maintenance</li>
-    </ul>
   </div>
 </section>
 
 <style>
-.hero{position:relative;overflow:hidden}
-.bg{position:absolute;inset:0}
-.vignette{position:absolute;inset:-8%;background:radial-gradient(80% 65% at 65% 40%,rgba(28,45,56,.25),transparent 65%)}
-.gradient{position:absolute;inset:0;background:linear-gradient(180deg,#0f1821 0%, #12161b 38%, #14181c 100%);opacity:.04}
-.wrap{position:relative;max-width:1120px;margin:0 auto;padding:96px 18px 56px;color:#121317}
-.title{font-size:clamp(34px,5.2vw,64px);line-height:1.08;margin:0 0 10px;font-weight:800;letter-spacing:-.015em}
-.title span{color:#b07a3a}
-.lede{margin:0 0 20px;color:#4a5563;font-size:clamp(18px,2.2vw,20px)}
-.cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
-.btn.primary{
-  background:linear-gradient(180deg,#d9b07a 0%,#b3864f 100%);
-  color:#fff;text-decoration:none;font-weight:800;border-radius:14px;padding:12px 18px;
-  box-shadow:0 10px 26px rgba(176,125,66,.28)
+.hero{position:relative;background:var(--dark);color:#E9ECF2}
+.bg{position:absolute;inset:0;overflow:hidden}
+.lines{
+  position:absolute;inset:-20%;
+  background:linear-gradient(135deg, rgba(212,201,168,.18) 0%, rgba(10,25,47,0) 48%, rgba(212,201,168,.18) 100%);
+  filter:blur(2px)
 }
-.btn.primary:hover{filter:brightness(.96)}
-.link{font-weight:700;color:#1d1f24;text-decoration:none}
-.link:hover{text-decoration:underline}
-.badges{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 0;padding:0;list-style:none;color:#5a6472;font-size:14px}
+.overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%, rgba(10,25,47,.22) 65%, rgba(10,25,47,.45) 100%)}
+.inner{min-height:72vh;display:grid;place-items:center;padding:96px 32px}
+.content{max-width:800px;text-align:center}
+.title{
+  font-family:"Playfair Display",serif;font-weight:900;letter-spacing:-.01em;
+  font-size:clamp(36px,6.2vw,72px);line-height:1.12;margin:0 0 10px
+}
+.title em{color:var(--champagne);font-style:normal}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:10px 0 14px}
+.bullets{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:6px 0 0;padding:0;list-style:none;color:#CBD5E1}
 </style>
