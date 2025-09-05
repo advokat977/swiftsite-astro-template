@@ -3,7 +3,7 @@
     <h2>Contact us</h2>
     <p>Tell us about your site and which plan you want.</p>
 
-    <form class="panel" action="/api/contact" method="POST" novalidate onsubmit="return validateContactForm(event)">
+    <form class="panel" id="contactForm" novalidate>
       <div class="grid" style="margin-top:10px">
         <div class="form-field">
           <label for="name">Name</label>
@@ -24,11 +24,22 @@
         </div>
       </div>
 
+      <!-- If you later enable Turnstile, put its token into this hidden input via JS -->
+      <input type="hidden" id="cfTurnstileToken" name="cfTurnstileToken" />
+
       <div class="actions">
-        <button class="btn btn-primary" type="submit">Send message</button>
+        <button class="btn btn-primary" type="submit" id="contactSubmit">Send message</button>
       </div>
 
       <p class="help">No public email. Messages are processed server-side to avoid spam.</p>
+
+      <!-- success / error banners -->
+      <div id="contactSuccess" style="display:none;margin-top:10px;color:#05603A;font-weight:700">
+        Thanks — your message has been sent.
+      </div>
+      <div id="contactError" style="display:none;margin-top:10px;color:#B42318;font-weight:700">
+        Something went wrong. Please try again later.
+      </div>
     </form>
   </div>
 </section>
@@ -42,29 +53,61 @@
 </style>
 
 <script is:inline>
-  function validateContactForm(e){
-    const form = e.target;
-    const name = form.querySelector('#name');
-    const email = form.querySelector('#email');
-    const message = form.querySelector('#message');
-    const help = (id, text='') => form.querySelector(`[data-help-for="${id}"]`).textContent = text;
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('contactSubmit');
+  const okEl = document.getElementById('contactSuccess');
+  const errEl = document.getElementById('contactError');
 
+  const help = (id, text='') => {
+    const el = form.querySelector(`[data-help-for="${id}"]`);
+    if (el) el.textContent = text;
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Gather fields
+    const name = (form.querySelector('#name') as HTMLInputElement).value.trim();
+    const email = (form.querySelector('#email') as HTMLInputElement).value.trim();
+    const message = (form.querySelector('#message') as HTMLTextAreaElement).value.trim();
+    const cfTurnstileToken = (form.querySelector('#cfTurnstileToken') as HTMLInputElement).value || '';
+
+    // Basic client validation
     let ok = true;
+    if (!name) { setError('name','Please enter your name.'); ok = false; } else clearErr('name');
+    if (!/^\S+@\S+\.\S+$/.test(email)) { setError('email','Enter a valid email.'); ok = false; } else clearErr('email');
+    if (!message) { setError('message','Tell us what you need.'); ok = false; } else clearErr('message');
+    if (!ok) return;
 
-    // name
-    if(!name.value.trim()){ name.classList.add('error'); help('name','Please enter your name.'); ok = false; }
-    else { name.classList.remove('error'); help('name'); }
+    // UI lock
+    const original = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+    (submitBtn as HTMLButtonElement).disabled = true;
+    okEl.style.display = 'none';
+    errEl.style.display = 'none';
 
-    // email (very light regex)
-    const re=/^\S+@\S+\.\S+$/;
-    if(!re.test(email.value.trim())){ email.classList.add('error'); help('email','Enter a valid email.'); ok = false; }
-    else { email.classList.remove('error'); help('email'); }
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name, email, message, cfTurnstileToken }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        okEl.style.display = 'block';
+        form.reset();
+      } else {
+        errEl.textContent = data.error || 'Something went wrong. Please try again later.';
+        errEl.style.display = 'block';
+      }
+    } catch (err) {
+      errEl.style.display = 'block';
+    } finally {
+      submitBtn.textContent = original;
+      (submitBtn as HTMLButtonElement).disabled = false;
+    }
 
-    // message
-    if(!message.value.trim()){ message.classList.add('error'); help('message','Tell us what you need.'); ok = false; }
-    else { message.classList.remove('error'); help('message'); }
-
-    if(!ok){ e.preventDefault(); }
-    return ok;
-  }
+    function setError(id, msg){ const i = form.querySelector('#'+id); i?.classList.add('error'); help(id,msg); }
+    function clearErr(id){ const i = form.querySelector('#'+id); i?.classList.remove('error'); help(id); }
+  });
 </script>
