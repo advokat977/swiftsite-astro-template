@@ -1,14 +1,17 @@
 ---
-import { SITE } from "../../swiftsite.config";
+import { SITE, FEATURES } from "../../swiftsite.config";
+
 const links = [
   { href: "/", label: "Home" },
+  FEATURES.gallery && { href: "/gallery", label: "Gallery" },
+  FEATURES.blog && { href: "/insights", label: "Insights" },
   { href: "/thanks", label: "Thanks" },
-];
+].filter(Boolean);
 ---
 <header class="container header">
   <strong>{SITE.title}</strong>
   <nav>
-    {links.map(l => <a href={l.href}>{l.label}</a>)}
+    {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
   </nav>
 </header>
 
