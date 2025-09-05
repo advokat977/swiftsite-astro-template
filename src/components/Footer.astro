@@ -1,18 +1,19 @@
 ---
-import { SITE } from "../../swiftsite.config";
-const year = new Date().getFullYear();
 ---
-<footer class="footer">
-  <p>© {year} {SITE.title} — All rights reserved</p>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© {new Date().getFullYear()} SwiftSite — All rights reserved</p>
+    <nav class="mini">
+      <a href="/">Home</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 </footer>
 
 <style>
-.footer{
-  text-align:center;
-  padding:30px 20px;
-  color:var(--muted);
-  font-size:14px;
-  border-top:1px solid #eee;
-  margin-top:60px
-}
+.site-footer{border-top:1px solid #eee;background:#fff}
+.wrap{max-width:1120px;margin:0 auto;padding:18px;color:#6b737d;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.mini a{color:#6b737d;text-decoration:none;margin-left:10px}
+.mini a:hover{text-decoration:underline}
 </style>
