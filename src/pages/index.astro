@@ -6,7 +6,7 @@ import Hero from "../components/Hero.astro";
 import PricingTable from "../components/PricingTable.astro";
 import Process from "../components/Process.astro";
 import Contact from "../components/Contact.astro";
-import FAQ from "../components/FAQ.astro";
+import FinalCTA from "../components/FinalCTA.astro";
 import { FEATURES } from "../../swiftsite.config";
 ---
 <Base>
@@ -14,20 +14,11 @@ import { FEATURES } from "../../swiftsite.config";
 
   <main>
     <Hero />
-
     {FEATURES.pricing && <PricingTable />}
-
     <Process />
-
     {FEATURES.contact && <Contact />}
-
-    {FEATURES.faq && <div class="narrow"><FAQ /></div>}
+    <FinalCTA />
   </main>
 
   <Footer />
 </Base>
-
-<style>
-/* helper to make FAQ match the same max width */
-.narrow{max-width:1120px;margin:0 auto;padding:0 18px}
-</style>
