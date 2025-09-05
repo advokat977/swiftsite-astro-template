@@ -1,6 +1,13 @@
 ---
 import { SITE, THEME } from "../../swiftsite.config";
-const { title = SITE.title, description = SITE.description, ogImage = "/og.png", lang = SITE.lang } = Astro.props;
+
+// Props ostaju – ako zatreba custom title/desc per-page
+const {
+  title = SITE.title,
+  description = SITE.description,
+  ogImage = "/og.png",
+  lang = SITE.lang,
+} = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -18,12 +25,44 @@ const { title = SITE.title, description = SITE.description, ogImage = "/og.png",
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/globals.css" />
+
+    <!-- 1) Tema: LIGHT kao default iz configa -->
     <style>
       :root{
-        --bg:{THEME.bg};--panel:{THEME.panel};--ink:{THEME.ink};--muted:{THEME.muted};--accent:{THEME.accent};
-        --border:#e6e8ee;--max:1120px
+        --bg:{THEME.bg};
+        --panel:{THEME.panel};
+        --ink:{THEME.ink};
+        --muted:{THEME.muted};
+        --accent:{THEME.accent};
+        --border:#e6e8ee;
+        --max:1120px;
+      }
+
+      /* 2) Tema: DARK override */
+      :root[data-theme="dark"]{
+        --bg:#0d1117;
+        --panel:#0f1521;
+        --ink:#e6e9ef;
+        --muted:#aeb6c2;
+        --accent:#e24343; /* malo svjetliji akcent u dark-u */
+        --border:#222834;
       }
     </style>
+
+    <!-- 3) Instant inicijalizacija prije rendera (bez treptanja) -->
+    <script id="theme-init">
+      (() => {
+        try {
+          const KEY = "swiftsite-theme";
+          const saved = localStorage.getItem(KEY);
+          const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const theme = saved || (prefersDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_) {
+          /* ako localStorage nije dostupan, ignoriši */
+        }
+      })();
+    </script>
   </head>
   <body>
     <slot />
