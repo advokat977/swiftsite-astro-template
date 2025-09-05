@@ -1,28 +1,21 @@
 ---
-/* GLOBAL STYLES: obavezno ovako uvesti, bez <link> */
-import "../styles/global.css";
+import "../styles/globals.css";
 
-/* SEO meta opcionalno */
-const { title = "SwiftSite — Launch in 72h", description = "Streamlined web development. Premium craft, zero hassle." } = Astro.props;
+const {
+  title = "SwiftSite — Launch in 72h",
+  description = "Streamlined web development. Premium craft, zero hassle."
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <title>{title}</title>
     <meta name="description" content={description} />
-
-    <!-- Favor icons (opciono) -->
-    <link rel="icon" href="/favicon.ico" />
-
-    <!-- NIKAKVI stari CSS linkovi niti pozadinski SVG-ovi ovdje -->
+    <link rel="icon" href="/favicon.svg" />
   </head>
   <body>
-    <!-- Header/slot/Footer render ide iz pages -->
     <slot />
-
-    <!-- Nema skrivenih SVG-ova, pseudo-elemenata, niti background image-ova u layoutu -->
   </body>
 </html>
