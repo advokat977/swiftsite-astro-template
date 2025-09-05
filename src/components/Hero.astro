@@ -1,9 +1,10 @@
 ---
-import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
+import { SITE, LINKS, FEATURES, ASSETS } from "../../swiftsite.config";
 ---
 <section class="hero">
   <div class="container inner">
-    <h1>{SITE.title} <span class="emoji">🎉</span></h1>
+    <img class="hero-logo" src={ASSETS.logoLight} alt="SwiftSite logo" width="220" height="48" />
+    <h1 class="sr-only">{SITE.title}</h1>
     <p class="lede">{SITE.tagline}</p>
     <div class="actions">
       {FEATURES.contact && <a class="btn primary" href="#contact">Get in touch</a>}
@@ -15,10 +16,12 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 
 <style>
 .hero{
-  min-height:68vh;display:flex;align-items:center;
+  min-height:60vh;display:flex;align-items:center;
   background:linear-gradient(180deg,#fff 0%,#f6f7fb 100%);
+  text-align:center
 }
-.inner{text-align:center}
-.emoji{font-size:0.9em}
+.inner{max-width:720px}
+.hero-logo{margin:0 auto 16px auto;display:block;filter:none}
+.sr-only{position:absolute;left:-9999px}
 .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 </style>
