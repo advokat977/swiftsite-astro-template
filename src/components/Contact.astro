@@ -1,16 +1,19 @@
 ---
 import { LINKS } from "../../swiftsite.config";
 ---
-<section id="contact" class="panel">
-  <h2>Contact</h2>
-  <p class="muted">Simple placeholder — prava forma stiže u Fazi 4.</p>
-  <div class="row">
-    <a class="btn primary" href={LINKS.email}>Email us</a>
-  </div>
+<section id="contact" class="contact">
+  <h2>Contact us</h2>
+  <p class="lede">We’ll answer within 24 hours.</p>
+  <a class="btn primary" href={LINKS.email}>Email us</a>
 </section>
 
 <style>
-.panel{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:12px}
-.muted{color:var(--muted)}
-.row{margin-top:10px}
+.contact{
+  padding:60px 20px;text-align:center;
+  background:var(--panel);
+  border-radius:20px;
+  margin-top:40px
+}
+.contact h2{font-size:28px;margin:0 0 10px}
+.contact .lede{color:var(--muted);margin:0 0 20px}
 </style>
