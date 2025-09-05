@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const images = [
+  { src: "https://picsum.photos/seed/1/800/600", alt: "Sample 1" },
+  { src: "https://picsum.photos/seed/2/800/600", alt: "Sample 2" },
+  { src: "https://picsum.photos/seed/3/800/600", alt: "Sample 3" },
+  { src: "https://picsum.photos/seed/4/800/600", alt: "Sample 4" }
+];
+---
+<Base title="Gallery">
+  <Header />
+  <main class="container">
+    <h1>Gallery</h1>
+    <div class="grid">
+      {images.map(i => (
+        <a href={i.src} target="_blank" rel="noreferrer">
+          <img src={i.src} alt={i.alt} />
+        </a>
+      ))}
+    </div>
+  </main>
+  <Footer />
+
+  <style>
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+    img{width:100%;height:auto;border-radius:10px}
+  </style>
+</Base>
