@@ -3,69 +3,61 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 ---
 <section class="hero">
   <div class="bg">
-    <!-- diskretna mreža u pozadini -->
+    <!-- super-subtilna mreža -->
     <svg viewBox="0 0 100 100" aria-hidden="true" class="grid">
       <defs>
-        <pattern id="p" width="10" height="10" patternUnits="userSpaceOnUse">
-          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-opacity=".06" stroke-width=".6"/>
+        <pattern id="p" width="8" height="8" patternUnits="userSpaceOnUse">
+          <path d="M 8 0 L 0 0 0 8" fill="none" stroke="currentColor" stroke-opacity=".035" stroke-width=".5"/>
         </pattern>
       </defs>
       <rect width="100" height="100" fill="url(#p)"/>
     </svg>
-    <!-- mekani akcent “glow” -->
+    <!-- mehki akcent, niži i širi -->
     <div class="glow"></div>
   </div>
 
   <div class="container wrap">
-    <!-- Lijeva kolona: copy + CTA -->
+    <!-- Lijevo: teži, fokusiran copy -->
     <div class="left">
-      <h1>Brzi, lijepi sajtovi — bez komplikacija</h1>
+      <h1>Profesionalan sajt za 24h</h1>
       <p class="lede">
-        SwiftSite pravi <strong>landing</strong> + do 3 servisa (mail, kalendar, Zoom). 
-        Minimalna konfiguracija, maksimalna brzina. Online u 24h.
+        Landing + mail, kalendar ili Zoom. Brzo, čisto, bez glavobolje.
       </p>
 
       <div class="cta">
         {FEATURES.contact && <a class="btn primary" href="#contact">Get in touch</a>}
-        <a class="btn ghost" href="/thanks">See a live example</a>
+        <a class="btn ghost" href="/thanks" aria-label="See an example">See example</a>
       </div>
 
-      <div class="chips">
-        <span>⚡ Lighthouse 100/100</span>
-        <span>🛡️ Cloudflare hosting</span>
-        <span>💸 No setup headache</span>
-      </div>
+      <ul class="badges" role="list">
+        <li>⚡ 100/100 performance</li>
+        <li>🛡️ Cloudflare hosting</li>
+        <li>🔧 Zero maintenance</li>
+      </ul>
     </div>
 
-    <!-- Desna kolona: mali “browser mockup” -->
+    <!-- Desno: kompaktniji, kontrastniji mockup -->
     <div class="right">
-      <div class="mock">
-        <div class="bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <figure class="mock" aria-label="Website preview">
+        <div class="chrome">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
           <div class="addr">swiftsite.pages.dev</div>
         </div>
         <div class="hero-block">
-          <div class="title"></div>
-          <div class="line"></div>
+          <div class="ttl"></div>
+          <div class="sub"></div>
           <div class="btns">
             <div class="btn ph"></div>
             <div class="btn ph ghost"></div>
           </div>
         </div>
         <div class="cards">
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
+          <div class="card"></div><div class="card"></div><div class="card"></div>
         </div>
-      </div>
-      <p class="caption">Šablon spreman za prilagođavanje (Astro + Cloudflare Pages)</p>
+      </figure>
+      <figcaption class="caption">Astro + Cloudflare Pages template</figcaption>
     </div>
   </div>
-
-  <!-- talas-divider ka sljedećoj sekciji -->
-  <svg class="divider" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="currentColor" fill-opacity=".06" d="M0,64L60,58.7C120,53,240,43,360,53.3C480,64,600,96,720,96C840,96,960,64,1080,48C1200,32,1320,32,1380,32L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
-  </svg>
 </section>
 
 <style>
@@ -74,53 +66,58 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 .grid{width:100%;height:100%;color:#0a0a0a}
 :root[data-theme="dark"] .grid{color:#ffffff}
 .glow{
-  position:absolute;inset:auto -20% 0 -20%;height:40%;
-  background:radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--accent) 30%, transparent) 0%, transparent 70%);
-  filter:blur(40px);opacity:.55;pointer-events:none;
+  position:absolute;left:-15%;right:-15%;bottom:-10%;
+  height:38%;
+  background:radial-gradient(60% 80% at 50% 0%,
+    color-mix(in oklab, var(--accent) 24%, transparent) 0%,
+    transparent 70%);
+  filter:blur(46px);opacity:.45;pointer-events:none;
 }
 
+/* Layout */
 .wrap{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;
-  min-height:68vh;padding-top:28px;padding-bottom:18px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;
+  min-height:64vh;padding:48px 0 18px;
 }
-@media (max-width: 980px){ .wrap{grid-template-columns:1fr;min-height:auto;padding-top:10px} }
-
-.left h1{font-size:clamp(34px,6vw,58px);line-height:1.08;margin:0 0 10px}
-.left .lede{font-size:clamp(18px,2.2vw,20px);color:var(--muted);margin:0 0 18px}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 8px}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.chips span{
-  font-size:14px;color:var(--ink);background:var(--panel);
-  border:1px solid var(--border);border-radius:999px;padding:6px 10px
+@media (max-width: 980px){
+  .wrap{grid-template-columns:1fr;gap:22px;min-height:auto;padding:26px 0 10px}
 }
 
+/* Copy */
+.left h1{font-size:clamp(36px,5.8vw,56px);line-height:1.06;margin:0 0 8px}
+.left .lede{font-size:clamp(18px,2.3vw,22px);color:var(--muted);margin:0 0 18px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 6px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0;padding:0;list-style:none}
+.badges li{
+  font-size:13px;color:var(--ink);background:var(--panel);
+  border:1px solid var(--border);border-radius:999px;padding:7px 10px
+}
+
+/* Mockup */
 .right{display:flex;flex-direction:column;align-items:center}
 .mock{
-  width:min(540px,100%);border:1px solid var(--border);border-radius:14px;
-  background:#fff;box-shadow:0 10px 30px rgba(16,24,40,.10);overflow:hidden
+  width:min(520px,100%);border:1px solid var(--border);border-radius:14px;
+  background:#fff;box-shadow:0 18px 40px rgba(16,24,40,.12);overflow:hidden
 }
-:root[data-theme="dark"] .mock{background:#0f1521}
-.bar{
+:root[data-theme="dark"] .mock{
+  background:#0f1521;box-shadow:0 18px 40px rgba(0,0,0,.35)
+}
+.chrome{
   display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);
-  padding:8px 10px;background:linear-gradient(180deg,#f8f9fb, #f1f4f8)
+  padding:10px 12px;background:linear-gradient(180deg,#fafbff,#f1f4f8)
 }
-:root[data-theme="dark"] .bar{background:linear-gradient(180deg,#0f1521,#0d1420)}
-.dot{width:8px;height:8px;border-radius:50%;background:#e25d5d;display:inline-block}
-.dot:nth-child(2){background:#f5c351}.dot:nth-child(3){background:#63ca7b}
-.addr{
-  margin-left:auto;font-size:12px;color:var(--muted);background:var(--bg);
-  border:1px solid var(--border);padding:6px 10px;border-radius:10px
-}
-.hero-block{padding:22px 20px 10px}
-.title{width:68%;height:24px;border-radius:8px;background:color-mix(in oklab, var(--ink) 12%, transparent)}
-.line{margin-top:10px;width:52%;height:12px;border-radius:8px;background:color-mix(in oklab, var(--ink) 10%, transparent)}
+:root[data-theme="dark"] .chrome{background:linear-gradient(180deg,#101726,#0d1420)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;opacity:.9}
+.r{background:#ef6b6b}.y{background:#f5c351}.g{background:#63ca7b}
+.addr{margin-left:auto;font-size:12px;color:var(--muted);background:var(--bg);
+  border:1px solid var(--border);padding:6px 10px;border-radius:10px}
+.hero-block{padding:22px 20px 12px}
+.ttl{width:66%;height:24px;border-radius:8px;background:color-mix(in oklab, var(--ink) 14%, transparent)}
+.sub{margin-top:10px;width:52%;height:12px;border-radius:8px;background:color-mix(in oklab, var(--ink) 10%, transparent)}
 .btns{display:flex;gap:10px;margin-top:16px}
-.btn.ph{width:120px;height:36px;border-radius:10px;background:var(--accent);opacity:.8}
+.btn.ph{width:120px;height:36px;border-radius:10px;background:var(--accent)}
 .btn.ph.ghost{background:transparent;border:1px solid var(--border)}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 16px 22px}
 .card{height:90px;border-radius:12px;border:1px solid var(--border);background:var(--panel)}
-.caption{margin-top:10px;font-size:12px;color:var(--muted)}
-
-.divider{display:block;width:100%;height:70px;color:var(--ink)}
-:root[data-theme="dark"] .divider{color:#ffffff}
+.caption{margin-top:8px;font-size:12px;color:var(--muted);text-align:center}
 </style>
