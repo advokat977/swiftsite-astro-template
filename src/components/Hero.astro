@@ -2,8 +2,8 @@
 import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 ---
 <section class="hero">
+  <!-- Pozadinski grid + glow -->
   <div class="bg">
-    <!-- super-subtilna mreža -->
     <svg viewBox="0 0 100 100" aria-hidden="true" class="grid">
       <defs>
         <pattern id="p" width="8" height="8" patternUnits="userSpaceOnUse">
@@ -12,14 +12,13 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
       </defs>
       <rect width="100" height="100" fill="url(#p)"/>
     </svg>
-    <!-- mehki akcent ispod sadržaja -->
     <div class="glow"></div>
   </div>
 
   <div class="container wrap">
-    <!-- Lijeva kolona: poruka + akcija -->
+    <!-- Lijevo: poruka -->
     <div class="left">
-      <h1>Launch your site in 24h — effortlessly</h1>
+      <h1>Launch your site in <span class="nowrap">24h</span> — effortlessly</h1>
       <p class="lede">
         Landing + <strong>mail</strong>, <strong>calendar</strong> ili <strong>Zoom</strong>. Brzo, čisto, bez glavobolje.
       </p>
@@ -29,7 +28,6 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
         <a class="link" href="/thanks" aria-label="See example">See example →</a>
       </div>
 
-      <!-- društveni dokaz -->
       <div class="testimonial">
         <div class="stars" aria-hidden="true">★★★★★</div>
         <p>
@@ -38,7 +36,6 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
         </p>
       </div>
 
-      <!-- mini benefiti -->
       <ul class="benefits" role="list">
         <li>⚡ Lighthouse 100/100</li>
         <li>🛡️ Cloudflare hosting</li>
@@ -46,25 +43,68 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
       </ul>
     </div>
 
-    <!-- Desna kolona: kompaktniji mockup -->
+    <!-- Desno: S-kriva sa ikonama -->
     <div class="right">
-      <figure class="mock" aria-label="Website preview">
-        <div class="chrome">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <div class="addr">swiftsite.pages.dev</div>
+      <div class="curve-wrap">
+        <!-- Sama kriva: dupli stroke (svijetli + blur “glow”) -->
+        <svg class="curve" viewBox="0 0 600 800" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="12" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="var(--accent)" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity=".15"/>
+            </linearGradient>
+          </defs>
+
+          <!-- “S”-putanja (ručno crtana, prilagođena layoutu) -->
+          <path
+            d="M 560 60
+               C 420 40, 360 110, 320 170
+               C 260 260, 220 300, 120 340
+               C 40 372, 40 430, 120 468
+               C 250 530, 330 590, 420 660
+               C 520 736, 520 800, 360 780"
+            fill="none"
+            stroke="url(#g)"
+            stroke-width="10"
+            filter="url(#soft)"
+            stroke-linecap="round"
+          />
+          <path
+            d="M 560 60
+               C 420 40, 360 110, 320 170
+               C 260 260, 220 300, 120 340
+               C 40 372, 40 430, 120 468
+               C 250 530, 330 590, 420 660
+               C 520 736, 520 800, 360 780"
+            fill="none"
+            stroke="var(--accent)"
+            stroke-opacity=".85"
+            stroke-width="3.5"
+            stroke-linecap="round"
+          />
+        </svg>
+
+        <!-- Ikone: male kartice pozicionirane duž krive -->
+        <div class="icon i1" aria-hidden="true" title="Email">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         </div>
-        <div class="hero-block">
-          <div class="ttl"></div>
-          <div class="sub"></div>
-          <div class="btns">
-            <div class="btn ph"></div>
-            <div class="btn ph ghost"></div>
-          </div>
+        <div class="icon i2" aria-hidden="true" title="Calendar">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         </div>
-        <div class="cards">
-          <div class="card"></div><div class="card"></div><div class="card"></div>
+        <div class="icon i3" aria-hidden="true" title="Zoom / Video">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M17 9l4-2v10l-4-2z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         </div>
-      </figure>
+        <div class="icon i4" aria-hidden="true" title="Files / Upload">
+          <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 3v6h6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -75,29 +115,30 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 .grid{width:100%;height:100%;color:#0a0a0a}
 :root[data-theme="dark"] .grid{color:#ffffff}
 .glow{
-  position:absolute;left:-18%;right:-18%;bottom:-12%;
-  height:42%;
-  background:radial-gradient(60% 80% at 50% 0%,
+  position:absolute;left:-18%;right:-18%;bottom:-10%;
+  height:45%;
+  background:radial-gradient(60% 80% at 55% 0%,
     color-mix(in oklab, var(--accent) 22%, transparent) 0%,
     transparent 70%);
-  filter:blur(48px);opacity:.40;pointer-events:none;
+  filter:blur(46px);opacity:.35;pointer-events:none;
 }
 
 /* Layout */
 .wrap{
-  display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
-  min-height:64vh;padding:54px 0 10px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;
+  min-height:66vh;padding:60px 0 20px;
 }
 @media (max-width: 980px){
-  .wrap{grid-template-columns:1fr;gap:22px;min-height:auto;padding:30px 0 10px}
+  .wrap{grid-template-columns:1fr;gap:28px;min-height:auto;padding:32px 0 16px}
 }
 
-/* Copy */
+/* Tekstualni blok */
 .left h1{font-size:clamp(36px,5.6vw,58px);line-height:1.06;margin:0 0 10px}
+.nowrap{white-space:nowrap}
 .left .lede{font-size:clamp(18px,2.2vw,21px);color:var(--muted);margin:0 0 18px}
-.cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:6px 0 4px}
-.link{font-weight:600;color:var(--ink)}
-.link:hover{text-decoration:underline}
+.cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:6px 0 8px}
+.link{font-weight:600;color:var(--ink)} .link:hover{text-decoration:underline}
+
 .testimonial{
   display:flex;gap:10px;align-items:flex-start;margin-top:12px;
   background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:10px 12px;max-width:560px
@@ -105,36 +146,37 @@ import { SITE, LINKS, FEATURES } from "../../swiftsite.config";
 .stars{letter-spacing:2px;color:#f5b301;font-size:14px;margin-top:2px}
 .testimonial p{margin:0;font-size:14px;color:var(--ink)}
 .who{color:var(--muted)}
+
 .benefits{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0;padding:0;list-style:none}
 .benefits li{
   font-size:13px;color:var(--ink);background:var(--panel);
   border:1px solid var(--border);border-radius:999px;padding:7px 10px
 }
 
-/* Mockup */
-.right{display:flex;flex-direction:column;align-items:center}
-.mock{
-  width:min(520px,100%);border:1px solid var(--border);border-radius:16px;
-  background:#fff;box-shadow:0 20px 48px rgba(16,24,40,.14);overflow:hidden
+/* Kriva + ikone */
+.right{display:flex;justify-content:center}
+.curve-wrap{position:relative;width:min(560px,100%);aspect-ratio:3/4}
+.curve{position:absolute;inset:0}
+
+.icon{
+  position:absolute; width:44px; height:44px;
+  border-radius:12px; background:var(--bg);
+  border:1px solid var(--border);
+  color:color-mix(in oklab, var(--ink) 88%, transparent);
+  display:grid;place-items:center;
+  box-shadow:0 8px 18px rgba(16,24,40,.10);
 }
-:root[data-theme="dark"] .mock{
-  background:#0f1521;box-shadow:0 20px 48px rgba(0,0,0,.35)
+.icon svg{width:22px;height:22px}
+
+/* Ručno pozicionirane tačke duž putanje (vizuelno prati S-krivulju) */
+.i1{top:16%; left:54%}
+.i2{top:40%; left:18%}
+.i3{top:58%; left:62%}
+.i4{top:80%; left:36%}
+
+/* Tamni mod – malo jači kontrast ikona */
+:root[data-theme="dark"] .icon{
+  background:#0f1521;border-color:#1c2330;color:#cfd6e4;
+  box-shadow:0 8px 18px rgba(0,0,0,.35)
 }
-.chrome{
-  display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);
-  padding:10px 12px;background:linear-gradient(180deg,#fafbff,#f1f4f8)
-}
-:root[data-theme="dark"] .chrome{background:linear-gradient(180deg,#101726,#0d1420)}
-.dot{width:8px;height:8px;border-radius:50%;display:inline-block;opacity:.95}
-.r{background:#ef6b6b}.y{background:#f5c351}.g{background:#63ca7b}
-.addr{margin-left:auto;font-size:12px;color:var(--muted);background:var(--bg);
-  border:1px solid var(--border);padding:6px 10px;border-radius:10px}
-.hero-block{padding:20px 18px 12px}
-.ttl{width:66%;height:24px;border-radius:8px;background:color-mix(in oklab, var(--ink) 14%, transparent)}
-.sub{margin-top:10px;width:52%;height:12px;border-radius:8px;background:color-mix(in oklab, var(--ink) 10%, transparent)}
-.btns{display:flex;gap:10px;margin-top:16px}
-.btn.ph{width:120px;height:36px;border-radius:10px;background:var(--accent)}
-.btn.ph.ghost{background:transparent;border:1px solid var(--border)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:16px 16px 22px}
-.card{height:90px;border-radius:12px;border:1px solid var(--border);background:var(--panel)}
 </style>
