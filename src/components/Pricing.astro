@@ -3,6 +3,7 @@ import { PACKAGES } from "../../swiftsite.config";
 ---
 <section class="pricing">
   <h2>Packages</h2>
+  <p class="sub">Choose the plan that fits your needs.</p>
   <div class="grid">
     {PACKAGES.map(p => (
       <div class="card">
@@ -16,11 +17,22 @@ import { PACKAGES } from "../../swiftsite.config";
 </section>
 
 <style>
-.pricing h2{font-size:28px;margin:32px 0 12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:12px}
-.card h3{margin:0 0 6px}
-.price{font-weight:700;margin:4px 0 8px}
-.desc{color:var(--muted);margin:0 0 10px}
-ul{padding-left:18px;margin:0}
+.pricing{padding:60px 20px;text-align:center}
+.pricing h2{font-size:34px;margin:0}
+.sub{color:var(--muted);margin:8px 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.card{
+  background:#fff;
+  border:1px solid #eee;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 2px 6px #0000000d;
+  text-align:left;
+  transition:transform 0.2s ease,box-shadow 0.2s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 20px #00000014}
+.card h3{margin:0 0 6px;font-size:20px}
+.price{font-size:18px;font-weight:700;margin:6px 0 12px;color:var(--accent)}
+.desc{color:var(--muted);margin:0 0 12px}
+ul{margin:0;padding-left:18px;color:var(--ink)}
 </style>
