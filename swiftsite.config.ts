@@ -1,9 +1,9 @@
 // Osnovni podaci o sajtu
 export const SITE = {
   title: "SwiftSite",
-  tagline: "Fast, simple sites — Astro + Cloudflare",
+  tagline: "Launch in 72h — Astro + Cloudflare",
   description:
-    "Ultra-brzi sajtovi sa minimalnom konfiguracijom. Landing + mail + calendar + Zoom.",
+    "Ultra-brzi sajtovi sa minimalnom konfiguracijom. Landing + mail + calendar + Zoom. Lansiranje u roku od 72h.",
   lang: "en",
   author: "SwiftSite",
   url: "https://example.com" // postavi kad dodaš domen
@@ -61,10 +61,10 @@ export const PACKAGES = [
   }
 ];
 
-// Brend asseti (ovdje samo navodimo putanje iz /public)
+// Brend asseti (iz /public)
 export const ASSETS = {
-  logoLight: "/brand/swiftsite-logo.png", // ova koju si dodao
-  logoDark: "/brand/swiftsite-logo.png",  // može ista; kasnije možemo dodati tamnu varijantu
-  og: "/brand/swiftsite-logo.png",        // privremeni OG (1200x630 može kasnije)
-  favicon: "/favicon.svg"                 // zamijeni kad spremiš novi favicon
+  logoLight: "/brand/swiftsite-logo.png",
+  logoDark: "/brand/swiftsite-logo.png",
+  og: "/brand/swiftsite-logo.png",
+  favicon: "/favicon.svg"
 };
