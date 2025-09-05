@@ -1,99 +1,49 @@
 ---
 const faqs = [
-  {
-    q: "What exactly do I get within 72h?",
-    a: "A simple, fast landing page including: contact form (email), basic SEO, and fast hosting on Cloudflare Pages. If you choose, we also include calendar or Zoom integration (Plus/Pro plans)."
-  },
-  {
-    q: "Is hosting included in the price?",
-    a: "Yes. We use Cloudflare Pages (free for this type of site). There are no hidden fees. A custom domain, if you want one, is paid separately to a registrar (Cloudflare, Namecheap, etc.)."
-  },
-  {
-    q: "How do you prevent spam if there is no public email address?",
-    a: "The contact form sends messages via a serverless function (your email is never exposed). We also add anti-spam protection with Cloudflare Turnstile."
-  },
-  {
-    q: "Can I upgrade my plan later?",
-    a: "Of course. You can move from Basic to Plus or Pro at any time — we simply enable additional components and publish a new version."
-  },
-  {
-    q: "What if I don’t have content ready?",
-    a: "We can set up placeholder text and images, then replace them later. Your site stays fast and live while you finalize your content."
-  },
-  {
-    q: "Do I have access to code and versions?",
-    a: "Yes. The code lives in a Git repository; publishing is done manually via Cloudflare build hook. You can track and roll back versions anytime."
-  },
+  { q:"What exactly do I get within 72 hours?", a:"A fast landing with: contact form (email), basic SEO, fast hosting on Cloudflare Pages. Optional Calendar or Zoom (Plus/Pro)." },
+  { q:"Is hosting included?", a:"Yes. Cloudflare Pages (free for this type of sites). No hidden fees. Custom domain is separate (Cloudflare, Namecheap…)." },
+  { q:"How do you handle spam without a public email address?", a:"The contact form sends serverlessly (email not exposed). We add Cloudflare Turnstile for anti-spam." },
+  { q:"Can I upgrade later?", a:"Sure. From Basic to Plus or Pro anytime — we enable the extra components and deploy a new version." },
+  { q:"No content yet?", a:"We can ship placeholders first; you replace later. The site stays fast and live meanwhile." },
+  { q:"Do I get code and versions?", a:"Yes. Code in Git; deploy triggered via Cloudflare build hook. You can track and roll back versions." },
 ];
-
 const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
   "mainEntity": faqs.map(f => ({
-    "@type": "Question",
+    "@type":"Question",
     "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    "acceptedAnswer": { "@type":"Answer", "text": f.a }
   }))
 };
 ---
-<section id="faq" class="faq-section">
+<section id="faq" class="section">
   <div class="container">
     <header class="head">
       <h2>FAQ</h2>
-      <p class="lede">Straight to the point — most common questions and answers.</p>
+      <p class="lede">Short and clear — common questions answered.</p>
     </header>
 
     <div class="grid">
-      {faqs.map((item) => (
+      {faqs.map(item => (
         <details class="faq">
           <summary><span>{item.q}</span></summary>
           <div class="answer">{item.a}</div>
         </details>
       ))}
     </div>
-
-    <div class="cta-wrap">
-      <a class="btn primary" href="#contact">More questions? Contact us</a>
-    </div>
   </div>
 
-  <!-- SEO: FAQ schema -->
-  <script type="application/ld+json">
-    {JSON.stringify(faqSchema)}
-  </script>
+  <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
 </section>
 
 <style>
-.faq-section{padding:56px 0}
-.head{margin-bottom:18px}
-.head h2{font-size:clamp(26px,3.2vw,34px);margin:0 0 6px}
-.lede{color:var(--muted);margin:0}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-@media (max-width: 900px){
-  .grid{grid-template-columns:1fr}
-}
-
-.faq{
-  background:#fff;border:1px solid var(--border);border-radius:14px;padding:0;
-  box-shadow:0 12px 26px rgba(16,24,40,.08);overflow:hidden
-}
-:root[data-theme="dark"] .faq{
-  background:#0f1521;box-shadow:0 12px 26px rgba(0,0,0,.35)
-}
-
-.faq summary{
-  cursor:pointer;list-style:none;padding:16px 18px;display:flex;align-items:center;
-  font-weight:700;color:var(--ink)
-}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.faq{background:#fff;border:1px solid var(--border);border-radius:14px;padding:0;box-shadow:0 12px 26px rgba(16,24,40,.08);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:16px 18px;display:flex;align-items:center;font-weight:700;color:var(--ink)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary span{flex:1}
 .faq[open] summary{border-bottom:1px solid var(--border)}
-
 .answer{padding:14px 18px;color:var(--ink)}
-.cta-wrap{margin-top:16px}
 </style>
