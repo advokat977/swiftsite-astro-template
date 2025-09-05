@@ -8,19 +8,52 @@ const links = [
   { href: "/thanks", label: "Thanks" },
 ].filter(Boolean);
 ---
-<header class="container header">
-  <strong>{SITE.title}</strong>
-  <nav>
-    {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
-  </nav>
+<header class="shell">
+  <div class="container bar">
+    <div class="brand">
+      <a href="/"><strong>{SITE.title}</strong></a>
+    </div>
+
+    <nav class="nav">
+      {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
 </header>
 
+<nav class="drawer" hidden>
+  <div class="container drawer-inner">
+    {links.map((l:any) => <a href={l.href}>{l.label}</a>)}
+  </div>
+</nav>
+
+<script>
+  const btn = document.querySelector(".burger");
+  const drawer = document.querySelector(".drawer");
+  btn?.addEventListener("click", () => {
+    const open = drawer?.hasAttribute("hidden") ? false : true;
+    if (open) { drawer?.setAttribute("hidden",""); btn.setAttribute("aria-expanded","false"); }
+    else { drawer?.removeAttribute("hidden"); btn.setAttribute("aria-expanded","true"); }
+  });
+</script>
+
 <style>
-.header{
-  display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid var(--border);padding:12px 0
+.shell{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(160%) blur(8px);
+  background:color-mix(in oklab, #ffffff 70%, transparent);
+  border-bottom:1px solid var(--border);
 }
-.header nav{display:flex;gap:16px}
-.header a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent}
-.header a:hover{border-color:var(--ink)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.nav{display:flex;gap:18px}
+.nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
+.nav a:hover{border-color:var(--ink)}
+.burger{display:none;background:transparent;border:0;font-size:22px;line-height:1}
+.drawer{background:#fff;border-bottom:1px solid var(--border)}
+.drawer-inner{display:flex;flex-direction:column;gap:12px;padding:14px 20px}
+@media (max-width: 880px){
+  .nav{display:none}
+  .burger{display:block}
+}
 </style>
