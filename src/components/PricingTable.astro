@@ -1,0 +1,240 @@
+---
+const plans = [
+  {
+    key: "basic",
+    name: "Basic",
+    price: "€99 setup",
+    highlight: false,
+    features: {
+      landing: true,
+      contact: true,
+      seo: true,
+      hosting: true,
+      calendar: false,
+      zoom: false,
+      priority: false,
+    },
+    cta: { label: "Choose Basic", href: "#contact" }
+  },
+  {
+    key: "plus",
+    name: "Plus",
+    price: "€149 setup",
+    highlight: true, // Most popular
+    features: {
+      landing: true,
+      contact: true,
+      seo: true,
+      hosting: true,
+      calendar: true, // OR Zoom (vidi fusnotu)
+      zoom: true,     // OR Calendar (vidi fusnotu)
+      priority: false,
+    },
+    badge: "Most popular",
+    cta: { label: "Choose Plus", href: "#contact" }
+  },
+  {
+    key: "pro",
+    name: "Pro",
+    price: "€199 setup",
+    highlight: false,
+    features: {
+      landing: true,
+      contact: true,
+      seo: true,
+      hosting: true,
+      calendar: true,
+      zoom: true,
+      priority: true,
+    },
+    cta: { label: "Choose Pro", href: "#contact" }
+  },
+];
+
+const rows = [
+  { key: "landing",  label: "Landing page" },
+  { key: "contact",  label: "Contact form (email)" },
+  { key: "seo",      label: "SEO basics" },
+  { key: "hosting",  label: "Fast hosting" },
+  { key: "calendar", label: "Calendar integration" },
+  { key: "zoom",     label: "Zoom integration" },
+  { key: "priority", label: "Priority support" },
+];
+---
+<section id="pricing" class="pricing-section">
+  <div class="container">
+    <header class="head">
+      <h2>Packages</h2>
+      <p class="lede">Pick what you need. Upgrade anytime.</p>
+    </header>
+
+    <!-- DESKTOP: tabela -->
+    <div class="table-wrap" role="region" aria-labelledby="pricing-table-caption">
+      <table class="pricing-table" aria-describedby="pricing-footnote" id="pricing-table-caption">
+        <thead>
+          <tr>
+            <th class="feat-col" scope="col">What’s included</th>
+            {plans.map((p) => (
+              <th scope="col" class={`plan-col ${p.highlight ? "highlight" : ""}`}>
+                <div class="plan-head">
+                  {p.badge && <span class="badge">{p.badge}</span>}
+                  <div class="plan-name">{p.name}</div>
+                  <div class="plan-price">{p.price}</div>
+                  <a class={`btn choose ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a>
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <th scope="row" class="feat-label">{r.label}</th>
+              {plans.map((p) => (
+                <td class="tick">
+                  {p.features[r.key] ? (
+                    <span aria-label="Included" class="yes">✓</span>
+                  ) : (
+                    <span aria-label="Not included" class="no">—</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row" class="feat-label">Setup price</th>
+            {plans.map((p) => <td class="price">{p.price}</td>)}
+          </tr>
+          <tr class="cta-row">
+            <th scope="row" class="feat-label">Get started</th>
+            {plans.map((p) => (
+              <td>
+                <a class={`btn choose wide ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{p.cta.label}</a>
+              </td>
+            ))}
+          </tr>
+        </tfoot>
+      </table>
+      <p class="footnote" id="pricing-footnote">
+        * <strong>Plus</strong> uključuje <em>Calendar OR Zoom</em> (jedan dodatni servis).  
+        <strong>Pro</strong> uključuje oba: <em>Calendar AND Zoom</em>. Nema skrivenih troškova. Možete nadograditi bilo kada.
+      </p>
+    </div>
+
+    <!-- MOBILNI: kartice (stack) -->
+    <div class="cards" aria-label="Pricing cards (mobile)">
+      {plans.map((p) => (
+        <article class={`card ${p.highlight ? "highlight" : ""}`}>
+          {p.badge && <span class="badge">{p.badge}</span>}
+          <h3>{p.name}</h3>
+          <div class="price">{p.price}</div>
+          <ul class="list">
+            {rows.map((r) => (
+              <li class={p.features[r.key] ? "yes" : "no"}>
+                {p.features[r.key] ? "✓" : "—"} {r.label}
+              </li>
+            ))}
+          </ul>
+          <a class={`btn choose ${p.highlight ? "primary" : ""}`} href={p.cta.href}>{
+            p.cta.label
+          }</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.pricing-section { padding: 56px 0; }
+.head { text-align: left; margin-bottom: 18px; }
+.head h2 { font-size: clamp(26px, 3.2vw, 34px); margin: 0 0 6px; }
+.lede { color: var(--muted); margin: 0; }
+
+/* --- Tabela (desktop) --- */
+.table-wrap { overflow-x: auto; }
+.pricing-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 26px rgba(16,24,40,.08);
+}
+
+.pricing-table thead th {
+  text-align: left;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.pricing-table tbody td, .pricing-table tbody th {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.pricing-table tfoot td, .pricing-table tfoot th {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.feat-col { width: 38%; min-width: 220px; }
+.plan-col { width: 20.5%; min-width: 160px; }
+
+.plan-head { display: grid; gap: 6px; align-content: start; }
+.plan-name { font-weight: 700; }
+.plan-price { color: var(--muted); font-weight: 600; }
+.badge {
+  align-self: start;
+  display: inline-block; font-size: 12px; font-weight: 700;
+  color: var(--ink); background: var(--panel); border: 1px solid var(--border);
+  padding: 4px 8px; border-radius: 999px;
+}
+.plan-col.highlight .badge { background: #fff3f3; border-color: #ffd5d5; color: var(--accent); }
+.plan-col.highlight .plan-name { color: var(--accent); }
+
+.btn.choose { display:inline-block; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:#fff; font-weight:600; }
+.btn.choose.primary { background: var(--accent); border-color: color-mix(in oklab, var(--accent) 80%, black); color: #fff; box-shadow: 0 8px 18px rgba(177,28,28,.18); }
+.btn.choose.wide { width: 100%; text-align:center; }
+
+.feat-label { font-weight: 600; color: var(--ink); }
+.tick { text-align: center; font-weight: 700; }
+.yes { color: color-mix(in oklab, var(--accent) 90%, black); }
+.no { color: var(--muted); }
+
+.price { font-weight: 700; }
+
+.cta-row td { background: color-mix(in oklab, var(--panel) 60%, transparent); }
+
+.footnote { font-size: 13px; color: var(--muted); margin: 10px 4px 0; }
+
+/* --- Kartice (mobile) --- */
+.cards { display: none; margin-top: 18px; }
+.card {
+  background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: 0 12px 26px rgba(16,24,40,.08);
+  padding: 18px; display: grid; gap: 10px;
+}
+.card.highlight { border-color: #ffd5d5; box-shadow: 0 14px 30px rgba(177,28,28,.12); }
+.card .badge { justify-self: start; background: #fff3f3; border-color: #ffd5d5; color: var(--accent); }
+.card h3 { margin: 0; font-size: 20px; }
+.card .price { color: var(--muted); font-weight: 700; }
+.card .list { list-style: none; padding: 0; margin: 4px 0 8px; display: grid; gap: 6px; }
+.card .list li { font-size: 14px; }
+.card .list li.yes { color: var(--ink); }
+.card .list li.no { color: var(--muted); }
+
+/* --- Responsive switch --- */
+@media (max-width: 900px) {
+  .pricing-table { display: none; }
+  .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .head { text-align: left; }
+}
+
+:root[data-theme="dark"] .pricing-table,
+:root[data-theme="dark"] .card {
+  background: #0f1521;
+  box-shadow: 0 12px 26px rgba(0,0,0,.35);
+}
+</style>
