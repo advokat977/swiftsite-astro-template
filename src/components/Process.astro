@@ -1,0 +1,41 @@
+---
+const steps = [
+  { n: "01", title: "Kickoff & Concept", body: "We capture your goals and content, define the scope, and lock the visual direction." },
+  { n: "02", title: "Design & Build", body: "Rapid implementation with premium craft. You review a live preview and request tweaks." },
+  { n: "03", title: "Launch & Polish", body: "Final QA, performance/SEO passes and launch on Cloudflare Pages." },
+];
+---
+<section class="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <header class="head">
+      <h2 id="process-title">Our 72-Hour Process</h2>
+      <p class="lede">Transparent, efficient, and built to ship without cutting corners.</p>
+    </header>
+
+    <ol class="timeline">
+      {steps.map(s => (
+        <li class="step">
+          <div class="badge">{s.n}</div>
+          <div class="txt">
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+.process{padding:56px 0;background:#fff}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+.head{text-align:center;margin-bottom:22px}
+.head h2{margin:0 0 6px;font-size:clamp(26px,3.2vw,34px);font-weight:900}
+.head .lede{margin:0;color:#606973}
+.timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:0;padding:0;list-style:none}
+@media (max-width:900px){ .timeline{grid-template-columns:1fr} }
+.step{background:#fafafa;border:1px solid #eee;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.badge{min-width:40px;height:40px;border-radius:10px;background:#f3e4cf;color:#8b612c;display:grid;place-items:center;font-weight:900}
+.txt h3{margin:2px 0 4px;font-size:18px}
+.txt p{margin:0;color:#555e68}
+</style>
